@@ -405,8 +405,15 @@
 		- This prevents clipping by Obsidian's overflow:hidden leaf container
 	*/
 	.em-container {
+		padding: 6px;
 		overflow-y: auto;
 		overflow-x: hidden;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	/* Hide title — Obsidian already shows it in the navigation header */
+	.em-header {
+		display: none;
 	}
 
 	.em-matrix-wrapper {
@@ -418,6 +425,7 @@
 	.em-grid {
 		grid-template-columns: 1fr;
 		grid-template-rows: auto;
+		gap: 6px;
 		flex: none;
 		min-height: auto;
 		overflow: visible;
@@ -426,7 +434,7 @@
 	.em-quadrant {
 		overflow: visible;
 		max-height: none;
-		min-height: 80px;
+		min-height: 0;
 	}
 
 	.em-task-list {
@@ -435,8 +443,16 @@
 		overflow: visible;
 	}
 
+	.em-empty-state {
+		padding: 8px 4px;
+	}
+
 	.em-axis-label {
 		display: none;
+	}
+
+	.em-quadrant-header {
+		padding: 4px 8px;
 	}
 
 	.em-task {
@@ -451,16 +467,9 @@
 		height: 44px;
 		opacity: 0.6;
 	}
-}
 
-/* Very small mobile */
-@media (max-width: 400px) {
-	.em-quadrant {
-		max-height: none;
-	}
-
-	.em-title {
-		font-size: 1.1em;
+	.em-add-form {
+		padding: 6px;
 	}
 }
 

@@ -108,6 +108,10 @@ export class EisenhowerMatrixView extends ItemView {
 			if (isHidden) {
 				const input = formEl.querySelector(".em-task-input") as HTMLInputElement;
 				input?.focus();
+				// Scroll form into view after keyboard opens
+				setTimeout(() => {
+					formEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+				}, 300);
 			}
 		});
 
@@ -217,6 +221,13 @@ export class EisenhowerMatrixView extends ItemView {
 			inputEl.removeClass("em-input-error");
 		});
 
+		// Scroll form into view when keyboard opens on mobile
+		inputEl.addEventListener("focus", () => {
+			setTimeout(() => {
+				formEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+			}, 300);
+		});
+
 		cancelBtn.addEventListener("click", () => {
 			inputEl.value = "";
 			dateInput.value = "";
@@ -293,6 +304,13 @@ export class EisenhowerMatrixView extends ItemView {
 
 		titleInput.addEventListener("input", () => {
 			titleInput.removeClass("em-input-error");
+		});
+
+		// Scroll form into view when keyboard opens on mobile
+		titleInput.addEventListener("focus", () => {
+			setTimeout(() => {
+				formEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+			}, 300);
 		});
 
 		// Prevent clicks inside form from bubbling to drag handlers

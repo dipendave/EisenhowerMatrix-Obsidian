@@ -59,7 +59,7 @@ Unidirectional data flow: User action → View calls Plugin CRUD → Plugin save
 - **Data schema versioning** — `version` field in persisted data for future migrations
 
 ## Recent Changes
-- Fixed mobile layout (comprehensive): single scroll container strategy — `.em-container` fills the Obsidian leaf and scrolls, all inner elements use natural content height (`flex: none`). Added `box-sizing: border-box` to container. Playwright mobile UI tests (32 tests, iPhone SE + 16 Pro viewports)
+- Fixed mobile layout (comprehensive): single scroll container strategy — `.em-container` fills the Obsidian leaf and scrolls, all inner elements use natural content height (`flex: none`). Added `box-sizing: border-box`, `scrollIntoView()` on input focus for keyboard, hidden redundant title, tighter spacing. Playwright mobile UI tests (32 tests, iPhone SE + 16 Pro viewports)
 - Added inline task editing — click to edit title and due date in-place
 - Added post-build vault sync (esbuild plugin reads vault paths from `.env.local`, copies build artifacts, never touches `data.json`)
 - Added automated test suite (Jest + ts-jest) with 33 unit tests and GitHub Actions CI pipeline

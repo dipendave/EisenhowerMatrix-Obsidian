@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2026-02-08 23:50] - Mobile Compact Layout & Keyboard Scroll Fix
+
+**Fixed:**
+- Keyboard opening on iOS hid the input field — form now scrolls into view when input is focused (300ms delay for keyboard animation)
+- Redundant "Eisenhower Matrix" title on mobile (Obsidian already shows it in the nav bar) — now hidden on `<600px`
+- Tightened mobile spacing: reduced container/header/form padding, smaller grid gap, compact empty states
+
+**Changed:**
+- Added `scrollIntoView()` on focus for add form and edit form inputs
+- Added `-webkit-overflow-scrolling: touch` for smooth iOS scrolling
+
+**Files:**
+- `src/view.ts`
+- `styles.css`
+
+---
+
 ## [2026-02-08 23:30] - Comprehensive Mobile Layout Fix
 
 **Fixed:**
