@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../styles.css">
+	<style>
+		/* Simulate Obsidian's base CSS variables */
+		:root {
+			--background-primary: #ffffff;
+			--background-modifier-border: #ddd;
+			--interactive-accent: #7c5cbf;
+			--text-on-accent: #ffffff;
+			--text-normal: #222;
+			--text-muted: #999;
+		}
+		html, body {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			font-family: sans-serif;
+		}
+		/*
+			Simulate Obsidian's workspace leaf container.
+			On mobile, Obsidian's chrome (header, tab bar) takes ~90px,
+			leaving the content area as viewport minus that.
+		*/
+		.obsidian-leaf-sim {
+			height: calc(100vh - 90px);
+			overflow: hidden;
+			position: relative;
+		}
+	</style>
+</head>
+<body>
+
+<!-- Empty state: no tasks, form hidden — inside constrained Obsidian leaf -->
+<div id="empty-state" class="obsidian-leaf-sim">
+	<div class="em-container">
+		<div class="em-header">
+			<h2 class="em-title">Eisenhower Matrix</h2>
+		</div>
+		<div class="em-matrix-wrapper">
+			<div class="em-axis-label em-axis-urgency">
+				<span class="em-axis-left">URGENT</span>
+				<span class="em-axis-right">NOT URGENT</span>
+			</div>
+			<div class="em-grid">
+
+				<!-- Q1: Do -->
+				<div class="em-quadrant em-quadrant-q1" data-quadrant="q1">
+					<div class="em-quadrant-header">
+						<div class="em-quadrant-title-group">
+							<h3 class="em-quadrant-action">Do</h3>
+							<span class="em-quadrant-subtitle">Urgent &amp; Important</span>
+						</div>
+						<button class="em-add-btn" aria-label="Add task to Do">+</button>
+					</div>
+					<div class="em-task-list">
+						<div class="em-empty-state">No tasks yet</div>
+					</div>
+					<div class="em-add-form em-hidden">
+						<input type="text" class="em-task-input" placeholder="Task title...">
+						<div class="em-form-date-row">
+							<label class="em-date-label">Due:</label>
+							<input type="date" class="em-date-input">
+						</div>
+						<div class="em-form-btn-row">
+							<button class="em-form-submit">Add</button>
+							<button class="em-form-cancel">Cancel</button>
+						</div>
+					</div>
+				</div>
+
+				<!-- Q2: Schedule -->
+				<div class="em-quadrant em-quadrant-q2" data-quadrant="q2">
+					<div class="em-quadrant-header">
+						<div class="em-quadrant-title-group">
+							<h3 class="em-quadrant-action">Schedule</h3>
+							<span class="em-quadrant-subtitle">Not Urgent &amp; Important</span>
+						</div>
+						<button class="em-add-btn" aria-label="Add task to Schedule">+</button>
+					</div>
+					<div class="em-task-list">
+						<div class="em-empty-state">No tasks yet</div>
+					</div>
+					<div class="em-add-form em-hidden">
+						<input type="text" class="em-task-input" placeholder="Task title...">
+						<div class="em-form-date-row">
+							<label class="em-date-label">Due:</label>
+							<input type="date" class="em-date-input">
+						</div>
+						<div class="em-form-btn-row">
+							<button class="em-form-submit">Add</button>
+							<button class="em-form-cancel">Cancel</button>
+						</div>
+					</div>
+				</div>
+
+				<!-- Q3: Delegate -->
+				<div class="em-quadrant em-quadrant-q3" data-quadrant="q3">
+					<div class="em-quadrant-header">
+						<div class="em-quadrant-title-group">
+							<h3 class="em-quadrant-action">Delegate</h3>
+							<span class="em-quadrant-subtitle">Urgent &amp; Not Important</span>
+						</div>
+						<button class="em-add-btn" aria-label="Add task to Delegate">+</button>
+					</div>
+					<div class="em-task-list">
+						<div class="em-empty-state">No tasks yet</div>
+					</div>
+					<div class="em-add-form em-hidden">
+						<input type="text" class="em-task-input" placeholder="Task title...">
+						<div class="em-form-date-row">
+							<label class="em-date-label">Due:</label>
+							<input type="date" class="em-date-input">
+						</div>
+						<div class="em-form-btn-row">
+							<button class="em-form-submit">Add</button>
+							<button class="em-form-cancel">Cancel</button>
+						</div>
+					</div>
+				</div>
+
+				<!-- Q4: Eliminate -->
+				<div class="em-quadrant em-quadrant-q4" data-quadrant="q4">
+					<div class="em-quadrant-header">
+						<div class="em-quadrant-title-group">
+							<h3 class="em-quadrant-action">Eliminate</h3>
+							<span class="em-quadrant-subtitle">Not Urgent &amp; Not Important</span>
+						</div>
+						<button class="em-add-btn" aria-label="Add task to Eliminate">+</button>
+					</div>
+					<div class="em-task-list">
+						<div class="em-empty-state">No tasks yet</div>
+					</div>
+					<div class="em-add-form em-hidden">
+						<input type="text" class="em-task-input" placeholder="Task title...">
+						<div class="em-form-date-row">
+							<label class="em-date-label">Due:</label>
+							<input type="date" class="em-date-input">
+						</div>
+						<div class="em-form-btn-row">
+							<button class="em-form-submit">Add</button>
+							<button class="em-form-cancel">Cancel</button>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Form-open state: Q1 has a task + form visible -->
+<div id="form-open-state" class="obsidian-leaf-sim" style="margin-top: 16px;">
+	<div class="em-container">
+		<div class="em-header">
+			<h2 class="em-title">Eisenhower Matrix</h2>
+		</div>
+		<div class="em-matrix-wrapper">
+			<div class="em-axis-label em-axis-urgency">
+				<span class="em-axis-left">URGENT</span>
+				<span class="em-axis-right">NOT URGENT</span>
+			</div>
+			<div class="em-grid">
+
+				<!-- Q1 with task + form OPEN -->
+				<div class="em-quadrant em-quadrant-q1" data-quadrant="q1">
+					<div class="em-quadrant-header">
+						<div class="em-quadrant-title-group">
+							<h3 class="em-quadrant-action">Do</h3>
+							<span class="em-quadrant-subtitle">Urgent &amp; Important</span>
+						</div>
+						<button class="em-add-btn" aria-label="Add task to Do">+</button>
+					</div>
+					<div class="em-task-list">
+						<div class="em-task" data-task-id="test-1" draggable="true">
+							<div class="em-task-drag-handle">&#x2630;</div>
+							<div class="em-task-content">
+								<div class="em-task-title">Sample task</div>
+								<div class="em-task-due">Tomorrow</div>
+							</div>
+							<button class="em-task-delete" aria-label="Delete task">&times;</button>
+						</div>
+					</div>
+					<!-- Form is VISIBLE (no em-hidden) -->
+					<div class="em-add-form">
+						<input type="text" class="em-task-input" placeholder="Task title...">
+						<div class="em-form-date-row">
+							<label class="em-date-label">Due:</label>
+							<input type="date" class="em-date-input">
+						</div>
+						<div class="em-form-btn-row">
+							<button class="em-form-submit">Add</button>
+							<button class="em-form-cancel">Cancel</button>
+						</div>
+					</div>
+				</div>
+
+				<!-- Q2-Q4 -->
+				<div class="em-quadrant em-quadrant-q2" data-quadrant="q2">
+					<div class="em-quadrant-header">
+						<div class="em-quadrant-title-group">
+							<h3 class="em-quadrant-action">Schedule</h3>
+						</div>
+						<button class="em-add-btn">+</button>
+					</div>
+					<div class="em-task-list"><div class="em-empty-state">No tasks yet</div></div>
+					<div class="em-add-form em-hidden"></div>
+				</div>
+				<div class="em-quadrant em-quadrant-q3" data-quadrant="q3">
+					<div class="em-quadrant-header">
+						<div class="em-quadrant-title-group">
+							<h3 class="em-quadrant-action">Delegate</h3>
+						</div>
+						<button class="em-add-btn">+</button>
+					</div>
+					<div class="em-task-list"><div class="em-empty-state">No tasks yet</div></div>
+					<div class="em-add-form em-hidden"></div>
+				</div>
+				<div class="em-quadrant em-quadrant-q4" data-quadrant="q4">
+					<div class="em-quadrant-header">
+						<div class="em-quadrant-title-group">
+							<h3 class="em-quadrant-action">Eliminate</h3>
+						</div>
+						<button class="em-add-btn">+</button>
+					</div>
+					<div class="em-task-list"><div class="em-empty-state">No tasks yet</div></div>
+					<div class="em-add-form em-hidden"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

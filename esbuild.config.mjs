@@ -1,6 +1,42 @@
 import esbuild from "esbuild";
 import process from "process";
 import builtins from "builtin-modules";
+import { copyFileSync, existsSync, readFileSync } from "fs";
+import { join } from "path";
+
+// Read vault paths from .env.local (gitignored).
+// Format: VAULT_PLUGIN_DIRS=path1,path2
+// Only main.js, manifest.json, and styles.css are copied — data.json is NEVER touched.
+let VAULT_PLUGIN_DIRS = [];
+if (existsSync(".env.local")) {
+	const env = readFileSync(".env.local", "utf-8");
+	const match = env.match(/^VAULT_PLUGIN_DIRS=(.+)$/m);
+	if (match) {
+		VAULT_PLUGIN_DIRS = match[1].split(",").map((p) => p.trim()).filter(Boolean);
+	}
+}
+
+const SYNC_FILES = ["main.js", "manifest.json", "styles.css"];
+
+const vaultSyncPlugin = {
+	name: "vault-sync",
+	setup(build) {
+		build.onEnd((result) => {
+			if (result.errors.length > 0) return;
+			for (const dir of VAULT_PLUGIN_DIRS) {
+				if (!existsSync(dir)) {
+					console.log(`[vault-sync] Skipping (not found): ${dir}`);
+					continue;
+				}
+				for (const file of SYNC_FILES) {
+					if (!existsSync(file)) continue;
+					copyFileSync(file, join(dir, file));
+				}
+				console.log(`[vault-sync] Synced to ${dir}`);
+			}
+		});
+	},
+};
 
 const banner =
 `/*
@@ -39,6 +75,7 @@ const context = await esbuild.context({
 	sourcemap: prod ? false : "inline",
 	treeShaking: true,
 	outfile: "main.js",
+	plugins: [vaultSyncPlugin],
 });
 
 if (prod) {

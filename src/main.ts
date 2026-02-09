@@ -89,6 +89,14 @@ export default class EisenhowerMatrixPlugin extends Plugin {
 		this.data.tasks = this.data.tasks.filter((t) => t.id !== taskId);
 	}
 
+	editTask(taskId: string, title: string, dueDate: string | null): boolean {
+		const task = this.data.tasks.find((t) => t.id === taskId);
+		if (!task) return false;
+		task.title = title.trim();
+		task.dueDate = dueDate;
+		return true;
+	}
+
 	moveTask(taskId: string, targetQuadrant: Quadrant): void {
 		const task = this.data.tasks.find((t) => t.id === taskId);
 		if (task) {

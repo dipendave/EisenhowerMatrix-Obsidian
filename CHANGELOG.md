@@ -4,6 +4,78 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2026-02-08 22:45] - Mobile Layout Fix & Playwright Tests
+
+**Fixed:**
+- Quadrants collapsing to thin colored bars on mobile — root cause was `overflow: hidden` on `.em-container` and `.em-matrix-wrapper` clipping content in Obsidian's constrained workspace leaf
+- On mobile (`<600px`): container now uses `height: auto` + `overflow-y: auto`, wrapper uses `overflow-y: visible`, quadrants have `min-height: 80px`
+
+**Added:**
+- Playwright mobile UI tests (24 tests across iPhone SE + iPhone 16 Pro viewports)
+- Tests cover: quadrant visibility, header visibility, tap target sizes, overflow behavior, form accessibility in constrained containers
+- HTML test fixture reproducing the plugin's DOM structure with Obsidian-like constraints
+
+**Files:**
+- `styles.css`
+- `playwright.config.ts`
+- `tests/mobile.spec.ts`
+- `tests/fixtures/matrix.html`
+- `package.json`
+
+---
+
+## [2026-02-08 22:20] - Task Editing
+
+**Changed:**
+- Added `editTask()` method to plugin for updating task title and due date
+- Added inline edit mode — click a task to edit its title and due date in-place
+- Save with Enter or Save button, cancel with Escape or Cancel button
+- Added 5 new unit tests for editTask logic (38 total)
+
+**Files:**
+- `src/main.ts`
+- `src/view.ts`
+- `styles.css`
+- `tests/main.test.ts`
+
+---
+
+## [2026-02-08 22:10] - README, Vault Auto-Sync & Dev Workflow
+
+**Changed:**
+- Added README.md with feature overview and dev instructions
+- Added post-build vault sync via esbuild plugin — copies main.js, manifest.json, styles.css to vault plugin dirs after every build (data.json is never touched)
+- Vault paths stored in `.env.local` (gitignored) to keep personal paths out of the repo
+
+**Files:**
+- `README.md`
+- `esbuild.config.mjs`
+- `.env.local`
+- `.gitignore`
+
+---
+
+## [2026-02-08 22:00] - Automated Tests & CI Pipeline
+
+**Changed:**
+- Added Jest unit testing framework with ts-jest and manual obsidian mock
+- Extracted `formatDueDate()` and `isDueDatePast()` from view class into standalone exported functions for testability
+- Created 33 unit tests covering plugin CRUD logic, date utilities, and type constants
+- Added GitHub Actions CI workflow that runs tests and build on every push/PR
+- Added `npm test` script to package.json
+
+**Files:**
+- `jest.config.js`
+- `tests/__mocks__/obsidian.ts`
+- `tests/main.test.ts`
+- `tests/view.test.ts`
+- `tests/types.test.ts`
+- `src/view.ts`
+- `package.json`
+- `.github/workflows/ci.yml`
+
+---
+
 ## [2026-02-08 20:56] - Initial Plugin Implementation
 
 **Changed:**

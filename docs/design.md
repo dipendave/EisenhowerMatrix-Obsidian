@@ -8,10 +8,19 @@ An Obsidian community plugin that provides an interactive Eisenhower Matrix for 
 Plugin (main.ts) ── owns data, CRUD operations, persistence
     │
     └── View (view.ts) ── renders UI, handles all user interactions
+            │               exports formatDueDate(), isDueDatePast()
             │
             └── Types (types.ts) ── interfaces, enums, constants
 
 styles.css ── grid layout, colors, responsive breakpoints
+
+tests/
+    __mocks__/obsidian.ts ── manual mock for obsidian module
+    main.test.ts ── plugin CRUD tests
+    view.test.ts ── date utility tests
+    types.test.ts ── constants validation
+
+.github/workflows/ci.yml ── CI pipeline (test + build)
 ```
 
 Unidirectional data flow: User action → View calls Plugin CRUD → Plugin saves to `data.json` → View re-renders from data.
@@ -21,12 +30,13 @@ Unidirectional data flow: User action → View calls Plugin CRUD → Plugin save
 ### EisenhowerMatrixPlugin (`src/main.ts`)
 - Purpose: Plugin lifecycle, data ownership, task CRUD operations
 - Dependencies: `obsidian` (Plugin, WorkspaceLeaf)
-- Key interfaces: `onload()`, `onunload()`, `activateView()`, `addTask()`, `deleteTask()`, `moveTask()`, `getTasksForQuadrant()`
+- Key interfaces: `onload()`, `onunload()`, `activateView()`, `addTask()`, `editTask()`, `deleteTask()`, `moveTask()`, `getTasksForQuadrant()`
 
 ### EisenhowerMatrixView (`src/view.ts`)
 - Purpose: Renders the 2x2 matrix UI, handles all user interactions
 - Dependencies: `obsidian` (ItemView), Plugin instance, Types
-- Key interfaces: `renderMatrix()`, desktop drag (HTML5 API), mobile touch drag (250ms long-press), inline add/delete forms
+- Key interfaces: `renderMatrix()`, desktop drag (HTML5 API), mobile touch drag (250ms long-press), inline add/delete/edit forms
+- Exported utilities: `formatDueDate(dateStr)`, `isDueDatePast(dateStr)` — extracted for testability
 
 ### Types (`src/types.ts`)
 - Purpose: Shared data model and constants
@@ -49,4 +59,9 @@ Unidirectional data flow: User action → View calls Plugin CRUD → Plugin save
 - **Data schema versioning** — `version` field in persisted data for future migrations
 
 ## Recent Changes
+- Fixed mobile layout: removed `overflow: hidden` from container/wrapper at `<600px`, added `min-height` to quadrants. Added Playwright mobile UI tests (24 tests, iPhone SE + 16 Pro viewports)
+- Added inline task editing — click to edit title and due date in-place
+- Added post-build vault sync (esbuild plugin reads vault paths from `.env.local`, copies build artifacts, never touches `data.json`)
+- Added automated test suite (Jest + ts-jest) with 33 unit tests and GitHub Actions CI pipeline
+- Extracted `formatDueDate()` and `isDueDatePast()` as standalone exports from view module
 - Initial implementation: full plugin with 4-quadrant matrix, task CRUD, drag-and-drop (desktop + mobile), responsive CSS

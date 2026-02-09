@@ -10,3 +10,12 @@ node_modules
 # OS
 .DS_Store
 Thumbs.db
+
+# Local dev config (vault paths)
+.env.local
+
+# Test artifacts
+test-results/
+
+# Claude Code
+.claude/

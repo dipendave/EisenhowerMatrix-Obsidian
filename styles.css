@@ -329,6 +329,23 @@
 	color: var(--text-normal);
 }
 
+/* ===== EDIT FORM (INLINE) ===== */
+.em-task-editing {
+	cursor: default;
+}
+
+.em-edit-form {
+	width: 100%;
+}
+
+.em-edit-form .em-task-input {
+	margin-bottom: 4px;
+}
+
+.em-edit-form .em-form-date-row {
+	margin-bottom: 4px;
+}
+
 /* ===== EMPTY STATE ===== */
 .em-empty-state {
 	text-align: center;
@@ -380,6 +397,15 @@
 
 /* Small mobile: stack vertically */
 @media (max-width: 600px) {
+	.em-container {
+		height: auto;
+		overflow-y: auto;
+	}
+
+	.em-matrix-wrapper {
+		overflow-y: visible;
+	}
+
 	.em-grid {
 		grid-template-columns: 1fr;
 		grid-template-rows: auto;
@@ -388,6 +414,7 @@
 
 	.em-quadrant {
 		max-height: 250px;
+		min-height: 80px;
 	}
 
 	.em-axis-label {

@@ -134,11 +134,17 @@ export class EisenhowerMatrixView extends ItemView {
 
 		if (task.dueDate) {
 			const dueDateEl = contentEl.createDiv({ cls: "em-task-due" });
-			if (this.isDueDatePast(task.dueDate)) {
+			if (isDueDatePast(task.dueDate)) {
 				dueDateEl.addClass("em-overdue");
 			}
-			dueDateEl.setText(this.formatDueDate(task.dueDate));
+			dueDateEl.setText(formatDueDate(task.dueDate));
 		}
+
+		// Click to edit
+		contentEl.addEventListener("click", (e) => {
+			e.stopPropagation();
+			this.renderEditForm(taskEl, task);
+		});
 
 		// Delete button
 		const deleteBtn = taskEl.createEl("button", {
@@ -235,6 +241,66 @@ export class EisenhowerMatrixView extends ItemView {
 		this.plugin.deleteTask(taskId);
 		await this.plugin.savePluginData();
 		this.renderMatrix();
+	}
+
+	private async handleEditTask(taskId: string, title: string, dueDate: string | null): Promise<void> {
+		this.plugin.editTask(taskId, title, dueDate);
+		await this.plugin.savePluginData();
+		this.renderMatrix();
+	}
+
+	private renderEditForm(taskEl: HTMLElement, task: Task): void {
+		// Disable drag while editing
+		taskEl.setAttribute("draggable", "false");
+		taskEl.empty();
+		taskEl.addClass("em-task-editing");
+
+		const formEl = taskEl.createDiv({ cls: "em-edit-form" });
+
+		const titleInput = formEl.createEl("input", {
+			cls: "em-task-input",
+			attr: { type: "text", value: task.title },
+		});
+
+		const dateRow = formEl.createDiv({ cls: "em-form-date-row" });
+		dateRow.createEl("label", { text: "Due:", cls: "em-date-label" });
+		const dateInput = dateRow.createEl("input", {
+			cls: "em-date-input",
+			attr: { type: "date", value: task.dueDate || "" },
+		});
+
+		const btnRow = formEl.createDiv({ cls: "em-form-btn-row" });
+		const saveBtn = btnRow.createEl("button", { text: "Save", cls: "em-form-submit" });
+		const cancelBtn = btnRow.createEl("button", { text: "Cancel", cls: "em-form-cancel" });
+
+		const save = () => {
+			const title = titleInput.value.trim();
+			if (!title) {
+				titleInput.addClass("em-input-error");
+				return;
+			}
+			const dueDate = dateInput.value || null;
+			this.handleEditTask(task.id, title, dueDate);
+		};
+
+		saveBtn.addEventListener("click", save);
+		cancelBtn.addEventListener("click", () => this.renderMatrix());
+
+		titleInput.addEventListener("keydown", (e) => {
+			if (e.key === "Enter") save();
+			else if (e.key === "Escape") this.renderMatrix();
+		});
+
+		titleInput.addEventListener("input", () => {
+			titleInput.removeClass("em-input-error");
+		});
+
+		// Prevent clicks inside form from bubbling to drag handlers
+		formEl.addEventListener("mousedown", (e) => e.stopPropagation());
+		formEl.addEventListener("touchstart", (e) => e.stopPropagation());
+
+		titleInput.focus();
+		titleInput.select();
 	}
 
 	// ==================== DESKTOP DRAG & DROP ====================
@@ -433,31 +499,32 @@ export class EisenhowerMatrixView extends ItemView {
 		return null;
 	}
 
-	// ==================== UTILITIES ====================
+}
 
-	private formatDueDate(dateStr: string): string {
-		const date = new Date(dateStr + "T00:00:00");
-		const today = new Date();
-		today.setHours(0, 0, 0, 0);
+// ==================== EXPORTED UTILITIES ====================
 
-		const diffMs = date.getTime() - today.getTime();
-		const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
+export function formatDueDate(dateStr: string): string {
+	const date = new Date(dateStr + "T00:00:00");
+	const today = new Date();
+	today.setHours(0, 0, 0, 0);
 
-		if (diffDays === 0) return "Today";
-		if (diffDays === 1) return "Tomorrow";
-		if (diffDays === -1) return "Yesterday";
-		if (diffDays > 1 && diffDays <= 7) return `In ${diffDays} days`;
-		if (diffDays < -1) return `${Math.abs(diffDays)} days ago`;
+	const diffMs = date.getTime() - today.getTime();
+	const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
 
-		return date.toLocaleDateString(undefined, {
-			month: "short",
-			day: "numeric",
-			year: date.getFullYear() !== today.getFullYear() ? "numeric" : undefined,
-		});
-	}
+	if (diffDays === 0) return "Today";
+	if (diffDays === 1) return "Tomorrow";
+	if (diffDays === -1) return "Yesterday";
+	if (diffDays > 1 && diffDays <= 7) return `In ${diffDays} days`;
+	if (diffDays < -1) return `${Math.abs(diffDays)} days ago`;
 
-	private isDueDatePast(dateStr: string): boolean {
-		const date = new Date(dateStr + "T23:59:59");
-		return date < new Date();
-	}
+	return date.toLocaleDateString(undefined, {
+		month: "short",
+		day: "numeric",
+		year: date.getFullYear() !== today.getFullYear() ? "numeric" : undefined,
+	});
+}
+
+export function isDueDatePast(dateStr: string): boolean {
+	const date = new Date(dateStr + "T23:59:59");
+	return date < new Date();
 }
