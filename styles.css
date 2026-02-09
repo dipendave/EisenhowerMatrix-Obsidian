@@ -5,6 +5,7 @@
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
+	box-sizing: border-box;
 }
 
 .em-header {
@@ -397,25 +398,41 @@
 
 /* Small mobile: stack vertically */
 @media (max-width: 600px) {
+	/*
+		Mobile layout strategy:
+		- .em-container fills the Obsidian leaf (height: 100%) and is the ONLY scroll container
+		- All inner elements use natural content height (no flex: 1 or min-height: 0)
+		- This prevents clipping by Obsidian's overflow:hidden leaf container
+	*/
 	.em-container {
-		height: auto;
 		overflow-y: auto;
+		overflow-x: hidden;
 	}
 
 	.em-matrix-wrapper {
-		overflow-y: visible;
+		flex: none;
+		min-height: auto;
+		overflow: visible;
 	}
 
 	.em-grid {
 		grid-template-columns: 1fr;
 		grid-template-rows: auto;
-		overflow-y: auto;
+		flex: none;
+		min-height: auto;
+		overflow: visible;
 	}
 
 	.em-quadrant {
 		overflow: visible;
 		max-height: none;
 		min-height: 80px;
+	}
+
+	.em-task-list {
+		flex: none;
+		min-height: auto;
+		overflow: visible;
 	}
 
 	.em-axis-label {

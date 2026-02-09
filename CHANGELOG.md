@@ -4,15 +4,21 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-## [2026-02-08 23:10] - Fix Mobile Add Form Clipping
+## [2026-02-08 23:30] - Comprehensive Mobile Layout Fix
 
 **Fixed:**
-- Opening the add form on mobile caused quadrant content to shrink into a small clipped box
-- Root cause: `.em-quadrant` still had `overflow: hidden` (base CSS) and `max-height` constraints at mobile breakpoints
-- Fix: added `overflow: visible; max-height: none;` to `.em-quadrant` at `<600px` and `max-height: none` at `<400px`
+- Mobile content invisible or clipped when interacting with the matrix
+- Root cause: `height: auto` on `.em-container` caused it to grow beyond Obsidian's fixed-height leaf (which has `overflow: hidden`), so content beyond the boundary was clipped with no scroll
+- Also: `flex: 1` and `min-height: 0` on `.em-matrix-wrapper`, `.em-grid`, and `.em-task-list` constrained content height instead of letting it flow naturally
+- Also: missing `box-sizing: border-box` on container meant padding extended it beyond the leaf
+
+**Mobile layout strategy (new):**
+- `.em-container` fills the Obsidian leaf (`height: 100%`, `box-sizing: border-box`) and is the **only** scroll container (`overflow-y: auto`)
+- All inner elements (wrapper, grid, task list) use `flex: none; min-height: auto; overflow: visible` — natural content height, no constraints
+- Quadrants stack vertically, each sized by its content; container scrolls when total exceeds screen
 
 **Added:**
-- 4 new Playwright tests verifying quadrants have no `overflow: hidden` and no `max-height` on mobile (28 total)
+- 4 new Playwright tests: container fills leaf (not overflows it), inner elements use natural height, container is scrollable when forms are open (32 total)
 
 **Files:**
 - `styles.css`

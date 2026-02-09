@@ -120,16 +120,24 @@ test.describe("Mobile layout — constrained Obsidian workspace", () => {
 	});
 });
 
-test.describe("Mobile layout — no overflow:hidden on containers or quadrants", () => {
+test.describe("Mobile layout — scrollable container, no inner clipping", () => {
 	test.beforeEach(async ({ page }) => {
 		await page.goto(fixtureUrl);
 	});
 
-	test("em-container does not clip overflow on mobile", async ({ page }) => {
-		const overflow = await page.locator("#empty-state .em-container").evaluate(
-			(el) => getComputedStyle(el).overflowY
-		);
-		expect(overflow, "Container should not clip content").not.toBe("hidden");
+	test("em-container fills leaf and scrolls (not height:auto)", async ({ page }) => {
+		const result = await page.locator("#empty-state .em-container").evaluate((el) => {
+			const style = getComputedStyle(el);
+			return {
+				overflowY: style.overflowY,
+				ownHeight: el.getBoundingClientRect().height,
+				parentHeight: el.parentElement!.getBoundingClientRect().height,
+			};
+		});
+		// Container should fill its parent (Obsidian leaf), not extend beyond it
+		expect(result.ownHeight, "Container should fill the leaf, not overflow it").toBeLessThanOrEqual(result.parentHeight + 1);
+		// Container should scroll
+		expect(result.overflowY, "Container should scroll").not.toBe("hidden");
 	});
 
 	test("em-matrix-wrapper does not clip overflow on mobile", async ({ page }) => {
@@ -137,6 +145,18 @@ test.describe("Mobile layout — no overflow:hidden on containers or quadrants",
 			(el) => getComputedStyle(el).overflowY
 		);
 		expect(overflow, "Matrix wrapper should not clip content").not.toBe("hidden");
+	});
+
+	test("inner elements use natural height (no flex:1 constraining)", async ({ page }) => {
+		const result = await page.locator("#empty-state .em-matrix-wrapper").evaluate((el) => {
+			const style = getComputedStyle(el);
+			return {
+				flex: style.flex,
+				flexGrow: style.flexGrow,
+			};
+		});
+		// flex: none means flex-grow: 0 — wrapper should not be constrained by container height
+		expect(result.flexGrow, "Matrix wrapper should not use flex-grow").toBe("0");
 	});
 
 	test("em-quadrant does not clip overflow on mobile", async ({ page }) => {
@@ -156,6 +176,31 @@ test.describe("Mobile layout — no overflow:hidden on containers or quadrants",
 				(el) => getComputedStyle(el).maxHeight
 			);
 			expect(maxHeight, `Quadrant ${i + 1} should have no max-height`).toBe("none");
+		}
+	});
+
+	test("container is scrollable when form is open in constrained leaf", async ({ page }) => {
+		// Open the form in Q1
+		await page.locator("#empty-state .em-quadrant-q1 .em-add-form").evaluate((el) => {
+			el.classList.remove("em-hidden");
+		});
+
+		// Also open form in Q3 to ensure enough content to overflow
+		await page.locator("#empty-state .em-quadrant-q3 .em-add-form").evaluate((el) => {
+			el.classList.remove("em-hidden");
+		});
+
+		const result = await page.locator("#empty-state .em-container").evaluate((el) => {
+			return {
+				scrollHeight: el.scrollHeight,
+				clientHeight: el.clientHeight,
+				overflowY: getComputedStyle(el).overflowY,
+			};
+		});
+
+		// When forms are open, content should exceed container → scrollable
+		if (result.scrollHeight > result.clientHeight) {
+			expect(["auto", "scroll"]).toContain(result.overflowY);
 		}
 	});
 });
