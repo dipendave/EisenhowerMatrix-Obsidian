@@ -1,0 +1,12 @@
+# Build output
+main.js
+
+# npm
+node_modules
+
+# IDE
+.vscode
+
+# OS
+.DS_Store
+Thumbs.db

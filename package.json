@@ -1,0 +1,20 @@
+{
+	"name": "obsidian-eisenhower-matrix",
+	"version": "1.0.0",
+	"description": "Eisenhower Matrix plugin for Obsidian",
+	"main": "main.js",
+	"scripts": {
+		"dev": "node esbuild.config.mjs",
+		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production"
+	},
+	"keywords": ["obsidian", "eisenhower", "matrix", "productivity"],
+	"license": "MIT",
+	"devDependencies": {
+		"@types/node": "^16.11.6",
+		"builtin-modules": "^3.3.0",
+		"esbuild": "0.17.3",
+		"obsidian": "latest",
+		"tslib": "2.4.0",
+		"typescript": "4.7.4"
+	}
+}
