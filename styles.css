@@ -413,7 +413,8 @@
 	}
 
 	.em-quadrant {
-		max-height: 250px;
+		overflow: visible;
+		max-height: none;
 		min-height: 80px;
 	}
 
@@ -438,7 +439,7 @@
 /* Very small mobile */
 @media (max-width: 400px) {
 	.em-quadrant {
-		max-height: 200px;
+		max-height: none;
 	}
 
 	.em-title {

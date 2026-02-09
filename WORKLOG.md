@@ -9,3 +9,4 @@ Track of development iterations and time estimates.
 | 2026-02-08 22:10 | ~5min | Added README, post-build vault sync (esbuild plugin + .env.local), gitignored personal vault paths |
 | 2026-02-08 22:20 | ~5min | Added task editing — editTask() method, inline edit UI on click, edit form styles, 5 new tests |
 | 2026-02-08 22:45 | ~15min | Fixed mobile collapsed quadrants — Playwright tests (24), HTML fixture, CSS overflow fix |
+| 2026-02-08 23:10 | ~5min | Fixed mobile add form clipping — quadrant overflow:visible + max-height:none, 4 new Playwright tests (28 total) |

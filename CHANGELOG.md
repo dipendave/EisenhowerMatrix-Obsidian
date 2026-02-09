@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2026-02-08 23:10] - Fix Mobile Add Form Clipping
+
+**Fixed:**
+- Opening the add form on mobile caused quadrant content to shrink into a small clipped box
+- Root cause: `.em-quadrant` still had `overflow: hidden` (base CSS) and `max-height` constraints at mobile breakpoints
+- Fix: added `overflow: visible; max-height: none;` to `.em-quadrant` at `<600px` and `max-height: none` at `<400px`
+
+**Added:**
+- 4 new Playwright tests verifying quadrants have no `overflow: hidden` and no `max-height` on mobile (28 total)
+
+**Files:**
+- `styles.css`
+- `tests/mobile.spec.ts`
+
+---
+
 ## [2026-02-08 22:45] - Mobile Layout Fix & Playwright Tests
 
 **Fixed:**

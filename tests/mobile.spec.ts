@@ -120,7 +120,7 @@ test.describe("Mobile layout — constrained Obsidian workspace", () => {
 	});
 });
 
-test.describe("Mobile layout — container must not use overflow:hidden", () => {
+test.describe("Mobile layout — no overflow:hidden on containers or quadrants", () => {
 	test.beforeEach(async ({ page }) => {
 		await page.goto(fixtureUrl);
 	});
@@ -137,5 +137,25 @@ test.describe("Mobile layout — container must not use overflow:hidden", () => 
 			(el) => getComputedStyle(el).overflowY
 		);
 		expect(overflow, "Matrix wrapper should not clip content").not.toBe("hidden");
+	});
+
+	test("em-quadrant does not clip overflow on mobile", async ({ page }) => {
+		const quadrants = page.locator("#empty-state .em-quadrant");
+		for (let i = 0; i < 4; i++) {
+			const overflow = await quadrants.nth(i).evaluate(
+				(el) => getComputedStyle(el).overflowY
+			);
+			expect(overflow, `Quadrant ${i + 1} should not clip content`).not.toBe("hidden");
+		}
+	});
+
+	test("em-quadrant has no max-height on mobile", async ({ page }) => {
+		const quadrants = page.locator("#empty-state .em-quadrant");
+		for (let i = 0; i < 4; i++) {
+			const maxHeight = await quadrants.nth(i).evaluate(
+				(el) => getComputedStyle(el).maxHeight
+			);
+			expect(maxHeight, `Quadrant ${i + 1} should have no max-height`).toBe("none");
+		}
 	});
 });

@@ -59,7 +59,7 @@ Unidirectional data flow: User action → View calls Plugin CRUD → Plugin save
 - **Data schema versioning** — `version` field in persisted data for future migrations
 
 ## Recent Changes
-- Fixed mobile layout: removed `overflow: hidden` from container/wrapper at `<600px`, added `min-height` to quadrants. Added Playwright mobile UI tests (24 tests, iPhone SE + 16 Pro viewports)
+- Fixed mobile layout (two rounds): removed `overflow: hidden` from container/wrapper/quadrants at `<600px`, removed `max-height` constraints on quadrants, added `min-height` to quadrants. Added Playwright mobile UI tests (28 tests, iPhone SE + 16 Pro viewports)
 - Added inline task editing — click to edit title and due date in-place
 - Added post-build vault sync (esbuild plugin reads vault paths from `.env.local`, copies build artifacts, never touches `data.json`)
 - Added automated test suite (Jest + ts-jest) with 33 unit tests and GitHub Actions CI pipeline
