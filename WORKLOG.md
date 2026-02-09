@@ -11,3 +11,4 @@ Track of development iterations and time estimates.
 | 2026-02-08 22:45 | ~15min | Fixed mobile collapsed quadrants — Playwright tests (24), HTML fixture, CSS overflow fix |
 | 2026-02-08 23:30 | ~15min | Comprehensive mobile layout fix — single scroll container strategy, box-sizing fix, removed flex constraints on inner elements, 32 Playwright tests |
 | 2026-02-08 23:50 | ~10min | Mobile compact layout + keyboard scroll fix — hide redundant title, tighter spacing, scrollIntoView on input focus |
+| 2026-02-09 00:10 | ~2min | Added 60px bottom padding on mobile to clear Obsidian's bottom nav bar |

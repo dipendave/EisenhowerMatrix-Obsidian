@@ -406,6 +406,7 @@
 	*/
 	.em-container {
 		padding: 6px;
+		padding-bottom: 60px;
 		overflow-y: auto;
 		overflow-x: hidden;
 		-webkit-overflow-scrolling: touch;

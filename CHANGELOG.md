@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2026-02-09 00:10] - Bottom Padding for Obsidian Nav Bar
+
+**Fixed:**
+- Eliminate quadrant (last in stack) was hidden behind Obsidian's bottom navigation icons on mobile
+- Added 60px bottom padding to container on mobile so all quadrants are fully accessible when scrolled to bottom
+
+**Files:**
+- `styles.css`
+
+---
+
 ## [2026-02-08 23:50] - Mobile Compact Layout & Keyboard Scroll Fix
 
 **Fixed:**
