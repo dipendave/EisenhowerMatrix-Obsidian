@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2026-02-12 12:00] - Community Plugin Release Preparation
+
+**Added:**
+- MIT LICENSE file
+- GitHub Actions release workflow (`.github/workflows/release.yml`) — creates a draft GitHub Release with `main.js`, `manifest.json`, and `styles.css` on tag push
+- Installation section in README.md
+
+**Changed:**
+- Added `authorUrl` to `manifest.json`
+
+**Files:**
+- `LICENSE`
+- `manifest.json`
+- `.github/workflows/release.yml`
+- `README.md`
+
+---
+
 ## [2026-02-09 00:10] - Bottom Padding for Obsidian Nav Bar
 
 **Fixed:**

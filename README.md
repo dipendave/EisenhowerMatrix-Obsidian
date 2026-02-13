@@ -12,6 +12,13 @@ A plugin that adds an interactive Eisenhower Matrix to Obsidian for prioritizing
 - **Mobile support** — long-press drag, responsive layout
 - **Theme-aware** — works with light and dark mode
 
+## Installation
+
+1. Open **Settings** > **Community plugins** in Obsidian
+2. Turn off **Restricted mode** if prompted
+3. Click **Browse** and search for **Eisenhower Matrix**
+4. Click **Install**, then **Enable**
+
 ## Usage
 
 Open the matrix from the ribbon icon (grid) or via command palette: **Open Eisenhower Matrix**.
