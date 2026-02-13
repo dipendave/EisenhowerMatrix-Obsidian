@@ -13,3 +13,4 @@ Track of development iterations and time estimates.
 | 2026-02-08 23:50 | ~10min | Mobile compact layout + keyboard scroll fix — hide redundant title, tighter spacing, scrollIntoView on input focus |
 | 2026-02-09 00:10 | ~2min | Added 60px bottom padding on mobile to clear Obsidian's bottom nav bar |
 | 2026-02-12 12:00 | ~5min | Community plugin release prep — LICENSE, authorUrl, release workflow, Installation section in README |
+| 2026-02-12 13:00 | ~5min | Improved README — hero screenshot, feature table, collapsible mobile screenshot, clearer usage section |

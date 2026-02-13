@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2026-02-12 13:00] - Improved README
+
+**Changed:**
+- Rewrote README with desktop screenshot hero image, feature table, collapsible mobile screenshot, and clearer usage instructions
+
+**Files:**
+- `README.md`
+- `screenshots/desktop.png`
+- `screenshots/iphone.jpeg`
+
+---
+
 ## [2026-02-12 12:00] - Community Plugin Release Preparation
 
 **Added:**
