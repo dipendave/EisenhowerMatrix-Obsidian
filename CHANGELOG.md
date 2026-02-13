@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2026-02-13 13:00] - Plus Icon, Version Footer, Auto-Bump
+
+**Added:**
+- Version number displayed as faint footer text (`v1.0.1`) in the matrix view, read from manifest.json
+- Pre-commit hook script (`scripts/bump-version.mjs`) that auto-bumps the patch version when source files are committed
+
+**Fixed:**
+- Add button "+" was not centered — replaced text character with Obsidian's `setIcon("plus")` SVG icon
+- Added `padding: 0` to add button to remove default browser padding
+
+**Files:**
+- `src/view.ts`
+- `styles.css`
+- `scripts/bump-version.mjs`
+
+---
+
 ## [2026-02-13 12:00] - Fix All ObsidianReviewBot Required Issues
 
 **Fixed:**

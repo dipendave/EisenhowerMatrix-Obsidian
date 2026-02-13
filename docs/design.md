@@ -59,6 +59,8 @@ Unidirectional data flow: User action → View calls Plugin CRUD → Plugin save
 - **Data schema versioning** — `version` field in persisted data for future migrations
 
 ## Recent Changes
+- Added version footer (reads from manifest.json) and pre-commit hook for auto-bumping patch version on source changes
+- Add buttons use Obsidian's `setIcon("plus")` SVG for proper centering
 - Addressed all ObsidianReviewBot required issues: sentence case UI text, void-operator for unhandled promises, removed plugin ID from command ID, removed plugin name from command name, removed onunload leaf detach, replaced deprecated substr, replaced innerHTML with textContent, moved inline styles to CSS class, made async event handlers synchronous with void
 - Increased quadrant color opacity for vivid backgrounds (body 0.08→0.25, header 0.15→0.38, border 0.2→0.35) — same values work in both light and dark mode
 - Fixed mobile layout (comprehensive): single scroll container strategy — `.em-container` fills the Obsidian leaf and scrolls, all inner elements use natural content height (`flex: none`). Added `box-sizing: border-box`, `scrollIntoView()` on input focus for keyboard, hidden redundant title, tighter spacing. Playwright mobile UI tests (32 tests, iPhone SE + 16 Pro viewports)
