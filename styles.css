@@ -358,6 +358,9 @@
 
 /* ===== TOUCH CLONE ===== */
 .em-touch-clone {
+	position: fixed;
+	pointer-events: none;
+	z-index: 10000;
 	opacity: 0.85;
 	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 	border-radius: 6px;

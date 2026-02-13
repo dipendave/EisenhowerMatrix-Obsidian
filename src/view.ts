@@ -26,19 +26,21 @@ export class EisenhowerMatrixView extends ItemView {
 	}
 
 	getDisplayText(): string {
-		return "Eisenhower Matrix";
+		return "Eisenhower matrix";
 	}
 
 	getIcon(): string {
 		return "layout-grid";
 	}
 
-	async onOpen(): Promise<void> {
+	onOpen(): Promise<void> {
 		this.renderMatrix();
+		return Promise.resolve();
 	}
 
-	async onClose(): Promise<void> {
+	onClose(): Promise<void> {
 		this.cleanupTouchDrag();
+		return Promise.resolve();
 	}
 
 	// ==================== RENDERING ====================
@@ -49,7 +51,7 @@ export class EisenhowerMatrixView extends ItemView {
 		container.addClass("em-container");
 
 		const header = container.createDiv({ cls: "em-header" });
-		header.createEl("h2", { text: "Eisenhower Matrix", cls: "em-title" });
+		header.createEl("h2", { text: "Eisenhower matrix", cls: "em-title" });
 
 		const matrixWrapper = container.createDiv({ cls: "em-matrix-wrapper" });
 
@@ -130,7 +132,7 @@ export class EisenhowerMatrixView extends ItemView {
 
 		// Drag handle
 		const dragHandle = taskEl.createDiv({ cls: "em-task-drag-handle" });
-		dragHandle.innerHTML = "&#x2630;";
+		dragHandle.textContent = "\u2630";
 
 		// Content
 		const contentEl = taskEl.createDiv({ cls: "em-task-content" });
@@ -155,11 +157,11 @@ export class EisenhowerMatrixView extends ItemView {
 			cls: "em-task-delete",
 			attr: { "aria-label": "Delete task" },
 		});
-		deleteBtn.innerHTML = "&times;";
+		deleteBtn.textContent = "\u00d7";
 
 		deleteBtn.addEventListener("click", (e) => {
 			e.stopPropagation();
-			this.handleDeleteTask(task.id);
+			void this.handleDeleteTask(task.id);
 		});
 
 		// Drag setup
@@ -200,7 +202,7 @@ export class EisenhowerMatrixView extends ItemView {
 				return;
 			}
 			const dueDate = dateInput.value || null;
-			this.handleAddTask(quadrant, title, dueDate);
+			void this.handleAddTask(quadrant, title, dueDate);
 			inputEl.value = "";
 			dateInput.value = "";
 			inputEl.removeClass("em-input-error");
@@ -291,7 +293,7 @@ export class EisenhowerMatrixView extends ItemView {
 				return;
 			}
 			const dueDate = dateInput.value || null;
-			this.handleEditTask(task.id, title, dueDate);
+			void this.handleEditTask(task.id, title, dueDate);
 		};
 
 		saveBtn.addEventListener("click", save);
@@ -358,7 +360,7 @@ export class EisenhowerMatrixView extends ItemView {
 			}
 		});
 
-		quadrantEl.addEventListener("drop", async (e: DragEvent) => {
+		quadrantEl.addEventListener("drop", (e: DragEvent) => {
 			e.preventDefault();
 			quadrantEl.removeClass("em-drop-target");
 
@@ -368,8 +370,8 @@ export class EisenhowerMatrixView extends ItemView {
 			const task = this.plugin.data.tasks.find((t) => t.id === taskId);
 			if (task && task.quadrant !== quadrant) {
 				this.plugin.moveTask(taskId, quadrant);
-				await this.plugin.savePluginData();
 				this.renderMatrix();
+				void this.plugin.savePluginData();
 			}
 		});
 	}
@@ -397,12 +399,11 @@ export class EisenhowerMatrixView extends ItemView {
 				// Create visual clone
 				const clone = taskEl.cloneNode(true) as HTMLElement;
 				clone.addClass("em-touch-clone");
-				clone.style.position = "fixed";
-				clone.style.left = `${startX - 50}px`;
-				clone.style.top = `${startY - 20}px`;
-				clone.style.width = `${taskEl.offsetWidth}px`;
-				clone.style.pointerEvents = "none";
-				clone.style.zIndex = "10000";
+				clone.setCssStyles({
+					left: `${startX - 50}px`,
+					top: `${startY - 20}px`,
+					width: `${taskEl.offsetWidth}px`,
+				});
 				document.body.appendChild(clone);
 				this.touchClone = clone;
 
@@ -432,8 +433,10 @@ export class EisenhowerMatrixView extends ItemView {
 
 			e.preventDefault(); // Prevent scrolling while dragging
 
-			this.touchClone.style.left = `${touch.clientX - 50}px`;
-			this.touchClone.style.top = `${touch.clientY - 20}px`;
+			this.touchClone.setCssStyles({
+				left: `${touch.clientX - 50}px`,
+				top: `${touch.clientY - 20}px`,
+			});
 
 			// Highlight quadrant under finger
 			const targetQuadrant = this.getQuadrantAtPoint(touch.clientX, touch.clientY);
@@ -448,7 +451,7 @@ export class EisenhowerMatrixView extends ItemView {
 			}
 		};
 
-		const onTouchEnd = async (e: TouchEvent) => {
+		const onTouchEnd = (e: TouchEvent) => {
 			if (this.touchTimeout !== null) {
 				clearTimeout(this.touchTimeout);
 				this.touchTimeout = null;
@@ -466,7 +469,7 @@ export class EisenhowerMatrixView extends ItemView {
 				const task = this.plugin.data.tasks.find((t) => t.id === this.draggedTaskId);
 				if (task && task.quadrant !== targetQuadrant) {
 					this.plugin.moveTask(this.draggedTaskId, targetQuadrant);
-					await this.plugin.savePluginData();
+					void this.plugin.savePluginData();
 				}
 			}
 

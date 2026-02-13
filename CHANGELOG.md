@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2026-02-13 12:00] - Fix All ObsidianReviewBot Required Issues
+
+**Fixed:**
+- Use sentence case for all UI text ("Eisenhower Matrix" → "Eisenhower matrix")
+- Mark all unhandled promises with `void` operator (ribbon icon, command, click/submit/drop/touch handlers)
+- Command ID no longer includes plugin ID (`open-eisenhower-matrix` → `open-view`)
+- Command name no longer includes plugin name (`Open Eisenhower Matrix` → `Open matrix`)
+- Removed `onunload()` leaf detach — prevents resetting leaf position on reload
+- Replaced deprecated `substr()` with `substring()` in ID generation
+- Replaced `innerHTML` with `textContent` for drag handle (☰) and delete button (×)
+- Removed `async` from `onOpen`/`onClose` (no `await` expression) — returns `Promise.resolve()` instead
+- Made `drop` and `touchend` handlers synchronous, using `void` for fire-and-forget saves
+- Moved inline `style.position/pointerEvents/zIndex` on touch clone to CSS class, dynamic props use `setCssStyles()`
+
+**Files:**
+- `src/main.ts`
+- `src/view.ts`
+- `styles.css`
+
+---
+
 ## [2026-02-12 14:30] - Make Quadrant Colors Pop
 
 **Changed:**

@@ -19,21 +19,17 @@ export default class EisenhowerMatrixPlugin extends Plugin {
 			(leaf: WorkspaceLeaf) => new EisenhowerMatrixView(leaf, this)
 		);
 
-		this.addRibbonIcon("layout-grid", "Eisenhower Matrix", () => {
-			this.activateView();
+		this.addRibbonIcon("layout-grid", "Eisenhower matrix", () => {
+			void this.activateView();
 		});
 
 		this.addCommand({
-			id: "open-eisenhower-matrix",
-			name: "Open Eisenhower Matrix",
+			id: "open-view",
+			name: "Open matrix",
 			callback: () => {
-				this.activateView();
+				void this.activateView();
 			},
 		});
-	}
-
-	onunload(): void {
-		this.app.workspace.detachLeavesOfType(VIEW_TYPE_EISENHOWER);
 	}
 
 	async activateView(): Promise<void> {
@@ -41,7 +37,7 @@ export default class EisenhowerMatrixPlugin extends Plugin {
 		const leaves = workspace.getLeavesOfType(VIEW_TYPE_EISENHOWER);
 
 		if (leaves.length > 0) {
-			workspace.revealLeaf(leaves[0]);
+			await workspace.revealLeaf(leaves[0]);
 			return;
 		}
 
@@ -50,7 +46,7 @@ export default class EisenhowerMatrixPlugin extends Plugin {
 			type: VIEW_TYPE_EISENHOWER,
 			active: true,
 		});
-		workspace.revealLeaf(leaf);
+		await workspace.revealLeaf(leaf);
 	}
 
 	async loadPluginData(): Promise<void> {
@@ -112,6 +108,6 @@ export default class EisenhowerMatrixPlugin extends Plugin {
 		if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
 			return crypto.randomUUID();
 		}
-		return Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
+		return Date.now().toString(36) + Math.random().toString(36).substring(2, 11);
 	}
 }
