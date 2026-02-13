@@ -1,4 +1,4 @@
-import { ItemView, WorkspaceLeaf } from "obsidian";
+import { ItemView, WorkspaceLeaf, setIcon } from "obsidian";
 import {
 	VIEW_TYPE_EISENHOWER,
 	Quadrant,
@@ -68,6 +68,10 @@ export class EisenhowerMatrixView extends ItemView {
 		for (const q of quadrantOrder) {
 			this.renderQuadrant(grid, QUADRANT_META[q]);
 		}
+
+		// Version footer
+		const version = this.plugin.manifest.version;
+		container.createDiv({ cls: "em-version", text: `v${version}` });
 	}
 
 	private renderQuadrant(gridEl: HTMLElement, meta: QuadrantMeta): void {
@@ -86,7 +90,7 @@ export class EisenhowerMatrixView extends ItemView {
 			cls: "em-add-btn",
 			attr: { "aria-label": `Add task to ${meta.action}` },
 		});
-		addBtn.textContent = "+";
+		setIcon(addBtn, "plus");
 
 		// Task list
 		const listEl = quadrantEl.createDiv({ cls: "em-task-list" });

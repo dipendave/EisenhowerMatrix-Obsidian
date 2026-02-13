@@ -151,6 +151,7 @@
 	height: 28px;
 	border-radius: 50%;
 	border: none;
+	padding: 0;
 	background: var(--interactive-accent);
 	color: var(--text-on-accent);
 	font-size: 18px;
@@ -354,6 +355,15 @@
 	font-size: 0.8em;
 	opacity: 0.4;
 	font-style: italic;
+}
+
+/* ===== VERSION FOOTER ===== */
+.em-version {
+	text-align: right;
+	font-size: 0.65em;
+	color: var(--text-faint);
+	padding: 4px 8px 0;
+	flex-shrink: 0;
 }
 
 /* ===== TOUCH CLONE ===== */
