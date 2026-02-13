@@ -5,5 +5,6 @@
 	"minAppVersion": "0.15.0",
 	"description": "A visual Eisenhower Matrix for prioritizing tasks by urgency and importance.",
 	"author": "Dipen",
+	"authorUrl": "https://github.com/dipendave",
 	"isDesktopOnly": false
 }
