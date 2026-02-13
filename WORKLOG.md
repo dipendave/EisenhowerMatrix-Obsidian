@@ -14,3 +14,4 @@ Track of development iterations and time estimates.
 | 2026-02-09 00:10 | ~2min | Added 60px bottom padding on mobile to clear Obsidian's bottom nav bar |
 | 2026-02-12 12:00 | ~5min | Community plugin release prep — LICENSE, authorUrl, release workflow, Installation section in README |
 | 2026-02-12 13:00 | ~5min | Improved README — hero screenshot, feature table, collapsible mobile screenshot, clearer usage section |
+| 2026-02-12 14:30 | ~2min | Increased quadrant color opacity for vivid backgrounds (body 0.25, header 0.38, border 0.35) |

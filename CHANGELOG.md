@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2026-02-12 14:30] - Make Quadrant Colors Pop
+
+**Changed:**
+- Increased quadrant color opacity for more vivid, distinct backgrounds in both light and dark mode
+- Body background: 0.08 → 0.25, header background: 0.15 → 0.38, borders: 0.2 → 0.35
+- Applied uniformly to all four quadrants (Q1 red, Q2 blue, Q3 orange, Q4 gray)
+
+**Files:**
+- `styles.css`
+
+---
+
 ## [2026-02-12 13:00] - Improved README
 
 **Changed:**
