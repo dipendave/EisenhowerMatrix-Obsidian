@@ -9,9 +9,11 @@ import { fileURLToPath } from "url";
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const manifestPath = resolve(root, "manifest.json");
 const versionsPath = resolve(root, "versions.json");
+const packagePath = resolve(root, "package.json");
 
 const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
 const versions = JSON.parse(readFileSync(versionsPath, "utf8"));
+const pkg = JSON.parse(readFileSync(packagePath, "utf8"));
 
 const [major, minor, patch] = manifest.version.split(".").map(Number);
 const oldVersion = manifest.version;
@@ -22,5 +24,8 @@ writeFileSync(manifestPath, JSON.stringify(manifest, null, "\t") + "\n", "utf8")
 
 versions[newVersion] = manifest.minAppVersion;
 writeFileSync(versionsPath, JSON.stringify(versions, null, "\t") + "\n", "utf8");
+
+pkg.version = newVersion;
+writeFileSync(packagePath, JSON.stringify(pkg, null, "\t") + "\n", "utf8");
 
 console.log(`Version bumped: ${oldVersion} → ${newVersion}`);

@@ -4,6 +4,36 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2026-02-13 16:00] - Fix Version Inconsistencies + README Screenshot Refresh
+
+**Fixed:**
+- Synced `package.json` version from 1.0.0 to 1.0.3 to match `manifest.json`
+- Updated `scripts/bump-version.mjs` to also bump `package.json` version on auto-bump
+- Updated pre-commit hook to stage `package.json` alongside `manifest.json` and `versions.json`
+
+**Added:**
+- Populated fixture state in `tests/fixtures/matrix.html` with 10 realistic tasks across all 4 quadrants (for hero screenshot)
+- `scripts/capture-readme-screenshots.mjs` — Playwright script that captures 4 retina screenshots (desktop light, desktop dark, desktop overloaded, mobile)
+- `npm run screenshots` script
+
+**Changed:**
+- Rewrote `README.md` with new hero screenshot, 3 new feature rows (task count badges, undo on delete, overflow scrolling), dark mode / mobile / overflow screenshot sections, updated dev commands
+- Deleted stale `screenshots/desktop.png` and `screenshots/iphone.jpeg`
+
+**Files:**
+- `package.json`
+- `scripts/bump-version.mjs`
+- `.git/hooks/pre-commit`
+- `tests/fixtures/matrix.html`
+- `scripts/capture-readme-screenshots.mjs`
+- `README.md`
+- `screenshots/desktop-populated.png`
+- `screenshots/desktop-dark.png`
+- `screenshots/desktop-overloaded.png`
+- `screenshots/mobile-populated.png`
+
+---
+
 ## [2026-02-14 02:00] - Remove "Add date" toggle, always show date picker
 
 **Changed:**

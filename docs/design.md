@@ -63,6 +63,10 @@ Unidirectional data flow: User action → View calls Plugin CRUD → Plugin save
 - **Progressive disclosure** — drag handles hidden until hover, mobile empty quadrants collapsed to header-only
 
 ## Recent Changes
+- Fixed version inconsistencies: package.json synced to 1.0.3, bump script and pre-commit hook now include package.json
+- Added Playwright-based screenshot capture script (`scripts/capture-readme-screenshots.mjs`) for automated README screenshots (4 retina shots: desktop light/dark, overloaded, mobile)
+- Added populated fixture state in `tests/fixtures/matrix.html` with 10 realistic tasks across all quadrants
+- Rewrote README with new screenshots showcasing dark mode, mobile layout, overflow scrolling, and 3 new feature rows
 - Removed "Add date" toggle — date picker always visible in add-task form for faster task creation
 - Design overhaul: reduced quadrant color opacity (0.06/0.15), removed subtitles/title/footer, quadrant-colored buttons, 3-size type scale, hidden drag handles, no task borders, collapsed mobile empties, overflow fade hint, increased spacing
 - Task count badges in quadrant headers (hidden when 0), delete undo toast (5s Notice with Undo link), fixed desktop quadrant overflow clipping (`min-height: 0`), added desktop Playwright project
