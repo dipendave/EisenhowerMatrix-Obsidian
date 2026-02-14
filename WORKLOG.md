@@ -19,3 +19,6 @@ Track of development iterations and time estimates.
 | 2026-02-13 13:00 | ~10min | Centered add button (setIcon SVG), version footer, auto-bump pre-commit hook |
 | 2026-02-13 23:50 | ~5min | Fixed CI failures — added .npmrc with legacy-peer-deps, regenerated package-lock.json |
 | 2026-02-14 00:30 | ~30min | Task count badges, quadrant overflow fix (min-height:0), delete undo toast with Notice, restoreTask(), 3 new unit tests, 1 Playwright test, desktop project in config |
+| 2026-02-13 21:37 | ~10min | Added Playwright design-review screenshot script (6 screenshots: desktop/mobile, empty/overloaded/form-open states) |
+| 2026-02-14 01:30 | ~30min | Design overhaul — reduced color opacity, removed subtitles/title/footer, quadrant-colored buttons, 3-size type scale, hidden drag handles, collapsed mobile empties, date toggle, overflow fade hint |
+| 2026-02-14 02:00 | ~5min | Removed "Add date" toggle — date picker always visible in add-task form |

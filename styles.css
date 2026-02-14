@@ -8,17 +8,6 @@
 	box-sizing: border-box;
 }
 
-.em-header {
-	margin-bottom: 12px;
-	flex-shrink: 0;
-}
-
-.em-title {
-	margin: 0;
-	font-size: 1.4em;
-	font-weight: 600;
-}
-
 /* ===== MATRIX WRAPPER ===== */
 .em-matrix-wrapper {
 	flex: 1;
@@ -45,7 +34,7 @@
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: 1fr 1fr;
-	gap: 8px;
+	gap: 12px;
 	flex: 1;
 	min-height: 0;
 	overflow: hidden;
@@ -64,53 +53,69 @@
 
 /* Q1: Do — Red */
 .em-quadrant-q1 {
-	background: rgba(239, 68, 68, 0.25);
-	border-color: rgba(239, 68, 68, 0.35);
+	background: rgba(239, 68, 68, 0.06);
+	border-color: rgba(239, 68, 68, 0.15);
 }
 .em-quadrant-q1 .em-quadrant-header {
-	background: rgba(239, 68, 68, 0.38);
-	border-bottom: 1px solid rgba(239, 68, 68, 0.35);
+	background: rgba(239, 68, 68, 0.15);
+	border-bottom: 1px solid rgba(239, 68, 68, 0.15);
 }
 .em-quadrant-q1 .em-quadrant-action {
+	color: #ef4444;
+}
+.em-quadrant-q1 .em-add-btn {
+	border: 1.5px solid rgba(239, 68, 68, 0.4);
 	color: #ef4444;
 }
 
 /* Q2: Schedule — Blue */
 .em-quadrant-q2 {
-	background: rgba(59, 130, 246, 0.25);
-	border-color: rgba(59, 130, 246, 0.35);
+	background: rgba(59, 130, 246, 0.06);
+	border-color: rgba(59, 130, 246, 0.15);
 }
 .em-quadrant-q2 .em-quadrant-header {
-	background: rgba(59, 130, 246, 0.38);
-	border-bottom: 1px solid rgba(59, 130, 246, 0.35);
+	background: rgba(59, 130, 246, 0.15);
+	border-bottom: 1px solid rgba(59, 130, 246, 0.15);
 }
 .em-quadrant-q2 .em-quadrant-action {
+	color: #3b82f6;
+}
+.em-quadrant-q2 .em-add-btn {
+	border: 1.5px solid rgba(59, 130, 246, 0.4);
 	color: #3b82f6;
 }
 
 /* Q3: Delegate — Orange */
 .em-quadrant-q3 {
-	background: rgba(245, 158, 11, 0.25);
-	border-color: rgba(245, 158, 11, 0.35);
+	background: rgba(245, 158, 11, 0.06);
+	border-color: rgba(245, 158, 11, 0.15);
 }
 .em-quadrant-q3 .em-quadrant-header {
-	background: rgba(245, 158, 11, 0.38);
-	border-bottom: 1px solid rgba(245, 158, 11, 0.35);
+	background: rgba(245, 158, 11, 0.15);
+	border-bottom: 1px solid rgba(245, 158, 11, 0.15);
 }
 .em-quadrant-q3 .em-quadrant-action {
+	color: #f59e0b;
+}
+.em-quadrant-q3 .em-add-btn {
+	border: 1.5px solid rgba(245, 158, 11, 0.4);
 	color: #f59e0b;
 }
 
 /* Q4: Eliminate — Gray */
 .em-quadrant-q4 {
-	background: rgba(107, 114, 128, 0.25);
-	border-color: rgba(107, 114, 128, 0.35);
+	background: rgba(107, 114, 128, 0.06);
+	border-color: rgba(107, 114, 128, 0.15);
 }
 .em-quadrant-q4 .em-quadrant-header {
-	background: rgba(107, 114, 128, 0.38);
-	border-bottom: 1px solid rgba(107, 114, 128, 0.35);
+	background: rgba(107, 114, 128, 0.15);
+	border-bottom: 1px solid rgba(107, 114, 128, 0.15);
 }
 .em-quadrant-q4 .em-quadrant-action {
+	color: #6b7280;
+}
+.em-quadrant-q4 .em-add-btn {
+	border: 1.5px solid rgba(107, 114, 128, 0.4);
 	color: #6b7280;
 }
 
@@ -125,14 +130,13 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 8px 12px;
+	padding: 10px 14px;
 	flex-shrink: 0;
 }
 
 .em-quadrant-title-group {
 	display: flex;
 	flex-direction: column;
-	gap: 2px;
 }
 
 .em-quadrant-action {
@@ -143,25 +147,18 @@
 }
 
 .em-task-count {
-	font-size: 0.75em;
+	font-size: 0.7em;
 	font-weight: 400;
 	opacity: 0.6;
 	margin-left: 2px;
-}
-
-.em-quadrant-subtitle {
-	font-size: 0.7em;
-	opacity: 0.7;
 }
 
 .em-add-btn {
 	width: 28px;
 	height: 28px;
 	border-radius: 50%;
-	border: none;
 	padding: 0;
-	background: var(--interactive-accent);
-	color: var(--text-on-accent);
+	background: transparent;
 	font-size: 18px;
 	cursor: pointer;
 	display: flex;
@@ -173,15 +170,29 @@
 }
 
 .em-add-btn:hover {
-	opacity: 0.85;
+	opacity: 0.7;
 }
 
 /* ===== TASK LIST ===== */
 .em-task-list {
 	flex: 1;
 	overflow-y: auto;
-	padding: 6px;
+	padding: 8px;
 	min-height: 0;
+	position: relative;
+}
+
+/* Overflow fade hint — "scroll for more" signal */
+.em-task-list::after {
+	content: "";
+	position: sticky;
+	bottom: 0;
+	display: block;
+	height: 20px;
+	margin-top: -20px;
+	background: linear-gradient(transparent, var(--background-primary-alt, rgba(255, 255, 255, 0.5)));
+	pointer-events: none;
+	border-radius: 0 0 6px 6px;
 }
 
 /* ===== TASK ITEM ===== */
@@ -189,11 +200,11 @@
 	display: flex;
 	align-items: center;
 	gap: 8px;
-	padding: 6px 8px;
+	padding: 8px 10px;
 	margin-bottom: 4px;
 	border-radius: 6px;
 	background: var(--background-primary);
-	border: 1px solid var(--background-modifier-border);
+	border: none;
 	cursor: grab;
 	transition: opacity 0.15s, box-shadow 0.15s;
 	min-height: 36px;
@@ -209,10 +220,15 @@
 
 .em-task-drag-handle {
 	font-size: 12px;
-	opacity: 0.3;
+	opacity: 0;
 	cursor: grab;
 	flex-shrink: 0;
 	user-select: none;
+	transition: opacity 0.15s;
+}
+
+.em-task:hover .em-task-drag-handle {
+	opacity: 0.3;
 }
 
 .em-task-content {
@@ -271,7 +287,6 @@
 
 .em-add-form {
 	padding: 8px;
-	border-top: 1px solid var(--background-modifier-border);
 	flex-shrink: 0;
 }
 
@@ -299,8 +314,8 @@
 }
 
 .em-date-label {
-	font-size: 0.75em;
-	opacity: 0.7;
+	font-size: 0.7em;
+	opacity: 0.6;
 	flex-shrink: 0;
 }
 
@@ -311,8 +326,9 @@
 	border-radius: 4px;
 	background: var(--background-primary);
 	color: var(--text-normal);
-	font-size: 0.8em;
+	font-size: 0.7em;
 }
+
 
 .em-form-btn-row {
 	display: flex;
@@ -325,7 +341,7 @@
 	padding: 4px 8px;
 	border-radius: 4px;
 	border: none;
-	font-size: 0.8em;
+	font-size: 0.85em;
 	cursor: pointer;
 }
 
@@ -360,18 +376,9 @@
 .em-empty-state {
 	text-align: center;
 	padding: 16px 8px;
-	font-size: 0.8em;
+	font-size: 0.7em;
 	opacity: 0.4;
 	font-style: italic;
-}
-
-/* ===== VERSION FOOTER ===== */
-.em-version {
-	text-align: right;
-	font-size: 0.65em;
-	color: var(--text-faint);
-	padding: 4px 8px 0;
-	flex-shrink: 0;
 }
 
 /* ===== TOUCH CLONE ===== */
@@ -401,12 +408,8 @@
 		font-size: 0.85em;
 	}
 
-	.em-quadrant-subtitle {
-		display: none;
-	}
-
 	.em-task-delete {
-		opacity: 0.6;
+		opacity: 0.3;
 	}
 
 	.em-add-btn {
@@ -431,11 +434,6 @@
 		overflow-y: auto;
 		overflow-x: hidden;
 		-webkit-overflow-scrolling: touch;
-	}
-
-	/* Hide title — Obsidian already shows it in the navigation header */
-	.em-header {
-		display: none;
 	}
 
 	.em-matrix-wrapper {
@@ -465,6 +463,11 @@
 		overflow: visible;
 	}
 
+	/* Hide overflow fade on mobile (container scrolls, not task list) */
+	.em-task-list::after {
+		display: none;
+	}
+
 	.em-empty-state {
 		padding: 8px 4px;
 	}
@@ -482,12 +485,17 @@
 		padding: 8px;
 	}
 
+	/* Hide drag handle on mobile — long-press drag uses the task itself */
+	.em-task-drag-handle {
+		display: none;
+	}
+
 	.em-task-delete {
 		min-width: 44px;
 		min-height: 44px;
 		width: 44px;
 		height: 44px;
-		opacity: 0.6;
+		opacity: 0.3;
 	}
 
 	.em-add-form {
@@ -496,10 +504,6 @@
 }
 
 /* ===== DARK THEME ===== */
-.theme-dark .em-task {
-	border-color: rgba(255, 255, 255, 0.08);
-}
-
 .theme-dark .em-task:hover {
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }

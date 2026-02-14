@@ -4,6 +4,45 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2026-02-14 02:00] - Remove "Add date" toggle, always show date picker
+
+**Changed:**
+- Removed the "Add date" toggle button from the add-task form — date picker is now always visible
+- Simpler form: title input, date row, and buttons — no hidden state to discover
+
+**Removed:**
+- `em-add-date-toggle` CSS class and hover styles
+- `resetDateToggle()` helper and toggle click listener in view.ts
+
+**Files:**
+- `src/view.ts`
+- `styles.css`
+- `tests/fixtures/matrix.html`
+
+---
+
+## [2026-02-14 01:30] - Design Overhaul: Minimalist Visual Refresh
+
+**Changed:**
+- Reduced quadrant color opacity (body 0.25→0.06, header 0.38→0.15, border 0.35→0.15) for a calmer interface
+- Removed quadrant subtitles, title header, and version footer
+- Add buttons inherit quadrant color (transparent bg + colored border) instead of purple accent
+- Collapsed type scale from 7 sizes to 3: action (0.95em), body (0.85em), meta (0.7em)
+- Increased spacing: grid gap 8→12px, header/task/list padding increased
+- Drag handles hidden by default, shown on hover; hidden entirely on mobile
+- Task card borders removed, form border-top removed
+- Date row in add form hidden behind "Add date" toggle for faster quick-capture
+- Mobile delete button opacity 0.6→0.3; empty quadrants collapsed to header-only
+- Added overflow fade gradient hint on scrollable desktop task lists
+
+**Files:**
+- `styles.css`
+- `src/view.ts`
+- `tests/fixtures/matrix.html`
+- `tests/mobile.spec.ts`
+
+---
+
 ## [2026-02-14 00:30] - Task Count Badges, Quadrant Overflow Fix, Delete Undo Toast
 
 **Added:**
@@ -270,5 +309,24 @@ All notable changes to this project will be documented in this file.
 - `esbuild.config.mjs`
 - `versions.json`
 - `.gitignore`
+
+---
+
+## [2026-02-13 21:37] - Add Playwright design-review screenshot script
+
+**Added:**
+- Created `tests/design-screenshots.mjs` to capture design-review screenshots of the matrix fixture
+- Captures 6 screenshots: desktop empty, overloaded, overloaded Q1 (element), form-open, mobile empty, mobile overloaded
+- Desktop at 1280x720, mobile at iPhone SE (375x667)
+- Output directory: `screenshots/design-review/`
+
+**Files:**
+- `tests/design-screenshots.mjs`
+- `screenshots/design-review/desktop-empty.png`
+- `screenshots/design-review/desktop-overloaded.png`
+- `screenshots/design-review/desktop-overloaded-q1.png`
+- `screenshots/design-review/desktop-form-open.png`
+- `screenshots/design-review/mobile-empty.png`
+- `screenshots/design-review/mobile-overloaded.png`
 
 ---

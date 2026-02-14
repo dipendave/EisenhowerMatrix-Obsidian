@@ -8,6 +8,7 @@
 		/* Simulate Obsidian's base CSS variables */
 		:root {
 			--background-primary: #ffffff;
+			--background-primary-alt: #f5f5f5;
 			--background-modifier-border: #ddd;
 			--interactive-accent: #7c5cbf;
 			--text-on-accent: #ffffff;
@@ -37,9 +38,6 @@
 <!-- Empty state: no tasks, form hidden — inside constrained Obsidian leaf -->
 <div id="empty-state" class="obsidian-leaf-sim">
 	<div class="em-container">
-		<div class="em-header">
-			<h2 class="em-title">Eisenhower Matrix</h2>
-		</div>
 		<div class="em-matrix-wrapper">
 			<div class="em-axis-label em-axis-urgency">
 				<span class="em-axis-left">URGENT</span>
@@ -48,11 +46,10 @@
 			<div class="em-grid">
 
 				<!-- Q1: Do -->
-				<div class="em-quadrant em-quadrant-q1" data-quadrant="q1">
+				<div class="em-quadrant em-quadrant-q1 em-quadrant-empty" data-quadrant="q1">
 					<div class="em-quadrant-header">
 						<div class="em-quadrant-title-group">
 							<h3 class="em-quadrant-action">Do</h3>
-							<span class="em-quadrant-subtitle">Urgent &amp; Important</span>
 						</div>
 						<button class="em-add-btn" aria-label="Add task to Do">+</button>
 					</div>
@@ -73,11 +70,10 @@
 				</div>
 
 				<!-- Q2: Schedule -->
-				<div class="em-quadrant em-quadrant-q2" data-quadrant="q2">
+				<div class="em-quadrant em-quadrant-q2 em-quadrant-empty" data-quadrant="q2">
 					<div class="em-quadrant-header">
 						<div class="em-quadrant-title-group">
 							<h3 class="em-quadrant-action">Schedule</h3>
-							<span class="em-quadrant-subtitle">Not Urgent &amp; Important</span>
 						</div>
 						<button class="em-add-btn" aria-label="Add task to Schedule">+</button>
 					</div>
@@ -98,11 +94,10 @@
 				</div>
 
 				<!-- Q3: Delegate -->
-				<div class="em-quadrant em-quadrant-q3" data-quadrant="q3">
+				<div class="em-quadrant em-quadrant-q3 em-quadrant-empty" data-quadrant="q3">
 					<div class="em-quadrant-header">
 						<div class="em-quadrant-title-group">
 							<h3 class="em-quadrant-action">Delegate</h3>
-							<span class="em-quadrant-subtitle">Urgent &amp; Not Important</span>
 						</div>
 						<button class="em-add-btn" aria-label="Add task to Delegate">+</button>
 					</div>
@@ -123,11 +118,10 @@
 				</div>
 
 				<!-- Q4: Eliminate -->
-				<div class="em-quadrant em-quadrant-q4" data-quadrant="q4">
+				<div class="em-quadrant em-quadrant-q4 em-quadrant-empty" data-quadrant="q4">
 					<div class="em-quadrant-header">
 						<div class="em-quadrant-title-group">
 							<h3 class="em-quadrant-action">Eliminate</h3>
-							<span class="em-quadrant-subtitle">Not Urgent &amp; Not Important</span>
 						</div>
 						<button class="em-add-btn" aria-label="Add task to Eliminate">+</button>
 					</div>
@@ -155,9 +149,6 @@
 <!-- Form-open state: Q1 has a task + form visible -->
 <div id="form-open-state" class="obsidian-leaf-sim" style="margin-top: 16px;">
 	<div class="em-container">
-		<div class="em-header">
-			<h2 class="em-title">Eisenhower Matrix</h2>
-		</div>
 		<div class="em-matrix-wrapper">
 			<div class="em-axis-label em-axis-urgency">
 				<span class="em-axis-left">URGENT</span>
@@ -170,7 +161,6 @@
 					<div class="em-quadrant-header">
 						<div class="em-quadrant-title-group">
 							<h3 class="em-quadrant-action">Do</h3>
-							<span class="em-quadrant-subtitle">Urgent &amp; Important</span>
 						</div>
 						<button class="em-add-btn" aria-label="Add task to Do">+</button>
 					</div>
@@ -199,7 +189,7 @@
 				</div>
 
 				<!-- Q2-Q4 -->
-				<div class="em-quadrant em-quadrant-q2" data-quadrant="q2">
+				<div class="em-quadrant em-quadrant-q2 em-quadrant-empty" data-quadrant="q2">
 					<div class="em-quadrant-header">
 						<div class="em-quadrant-title-group">
 							<h3 class="em-quadrant-action">Schedule</h3>
@@ -209,7 +199,7 @@
 					<div class="em-task-list"><div class="em-empty-state">No tasks yet</div></div>
 					<div class="em-add-form em-hidden"></div>
 				</div>
-				<div class="em-quadrant em-quadrant-q3" data-quadrant="q3">
+				<div class="em-quadrant em-quadrant-q3 em-quadrant-empty" data-quadrant="q3">
 					<div class="em-quadrant-header">
 						<div class="em-quadrant-title-group">
 							<h3 class="em-quadrant-action">Delegate</h3>
@@ -219,7 +209,7 @@
 					<div class="em-task-list"><div class="em-empty-state">No tasks yet</div></div>
 					<div class="em-add-form em-hidden"></div>
 				</div>
-				<div class="em-quadrant em-quadrant-q4" data-quadrant="q4">
+				<div class="em-quadrant em-quadrant-q4 em-quadrant-empty" data-quadrant="q4">
 					<div class="em-quadrant-header">
 						<div class="em-quadrant-title-group">
 							<h3 class="em-quadrant-action">Eliminate</h3>
@@ -238,9 +228,6 @@
 <!-- Overloaded state: Q1 has 8 tasks — tests desktop grid overflow scrolling -->
 <div id="overloaded-state" class="obsidian-leaf-sim" style="margin-top: 16px;">
 	<div class="em-container">
-		<div class="em-header">
-			<h2 class="em-title">Eisenhower Matrix</h2>
-		</div>
 		<div class="em-matrix-wrapper">
 			<div class="em-axis-label em-axis-urgency">
 				<span class="em-axis-left">URGENT</span>
@@ -253,7 +240,6 @@
 					<div class="em-quadrant-header">
 						<div class="em-quadrant-title-group">
 							<h3 class="em-quadrant-action">Do <span class="em-task-count">8</span></h3>
-							<span class="em-quadrant-subtitle">Urgent &amp; Important</span>
 						</div>
 						<button class="em-add-btn" aria-label="Add task to Do">+</button>
 					</div>
@@ -303,7 +289,7 @@
 				</div>
 
 				<!-- Q2-Q4 empty -->
-				<div class="em-quadrant em-quadrant-q2" data-quadrant="q2">
+				<div class="em-quadrant em-quadrant-q2 em-quadrant-empty" data-quadrant="q2">
 					<div class="em-quadrant-header">
 						<div class="em-quadrant-title-group">
 							<h3 class="em-quadrant-action">Schedule</h3>
@@ -313,7 +299,7 @@
 					<div class="em-task-list"><div class="em-empty-state">No tasks yet</div></div>
 					<div class="em-add-form em-hidden"></div>
 				</div>
-				<div class="em-quadrant em-quadrant-q3" data-quadrant="q3">
+				<div class="em-quadrant em-quadrant-q3 em-quadrant-empty" data-quadrant="q3">
 					<div class="em-quadrant-header">
 						<div class="em-quadrant-title-group">
 							<h3 class="em-quadrant-action">Delegate</h3>
@@ -323,7 +309,7 @@
 					<div class="em-task-list"><div class="em-empty-state">No tasks yet</div></div>
 					<div class="em-add-form em-hidden"></div>
 				</div>
-				<div class="em-quadrant em-quadrant-q4" data-quadrant="q4">
+				<div class="em-quadrant em-quadrant-q4 em-quadrant-empty" data-quadrant="q4">
 					<div class="em-quadrant-header">
 						<div class="em-quadrant-title-group">
 							<h3 class="em-quadrant-action">Eliminate</h3>

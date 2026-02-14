@@ -50,9 +50,6 @@ export class EisenhowerMatrixView extends ItemView {
 		container.empty();
 		container.addClass("em-container");
 
-		const header = container.createDiv({ cls: "em-header" });
-		header.createEl("h2", { text: "Eisenhower matrix", cls: "em-title" });
-
 		const matrixWrapper = container.createDiv({ cls: "em-matrix-wrapper" });
 
 		// Urgency axis label
@@ -69,9 +66,6 @@ export class EisenhowerMatrixView extends ItemView {
 			this.renderQuadrant(grid, QUADRANT_META[q]);
 		}
 
-		// Version footer
-		const version = this.plugin.manifest.version;
-		container.createDiv({ cls: "em-version", text: `v${version}` });
 	}
 
 	private renderQuadrant(gridEl: HTMLElement, meta: QuadrantMeta): void {
@@ -89,7 +83,6 @@ export class EisenhowerMatrixView extends ItemView {
 		if (tasks.length > 0) {
 			h3.createSpan({ text: ` ${tasks.length}`, cls: "em-task-count" });
 		}
-		titleGroup.createEl("span", { text: meta.label, cls: "em-quadrant-subtitle" });
 
 		const addBtn = headerEl.createEl("button", {
 			cls: "em-add-btn",
@@ -100,6 +93,7 @@ export class EisenhowerMatrixView extends ItemView {
 		// Task list
 		const listEl = quadrantEl.createDiv({ cls: "em-task-list" });
 		if (tasks.length === 0) {
+			quadrantEl.addClass("em-quadrant-empty");
 			this.renderEmptyState(listEl);
 		} else {
 			for (const task of tasks) {

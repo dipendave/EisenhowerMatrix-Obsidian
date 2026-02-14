@@ -8,14 +8,15 @@ test.describe("Mobile layout — empty state", () => {
 		await page.goto(fixtureUrl);
 	});
 
-	test("all four quadrants are visible (height >= 80px)", async ({ page }) => {
+	test("all four quadrants are visible (height >= 40px)", async ({ page }) => {
 		const quadrants = page.locator("#empty-state .em-quadrant");
 		await expect(quadrants).toHaveCount(4);
 
 		for (let i = 0; i < 4; i++) {
 			const box = await quadrants.nth(i).boundingBox();
 			expect(box, `Quadrant ${i + 1} should have a bounding box`).not.toBeNull();
-			expect(box!.height, `Quadrant ${i + 1} height`).toBeGreaterThanOrEqual(80);
+			// Empty quadrants on mobile are collapsed to header-only (~57px)
+			expect(box!.height, `Quadrant ${i + 1} height`).toBeGreaterThanOrEqual(40);
 		}
 	});
 
@@ -96,7 +97,8 @@ test.describe("Mobile layout — constrained Obsidian workspace", () => {
 		for (let i = 0; i < 4; i++) {
 			const box = await quadrants.nth(i).boundingBox();
 			expect(box, `Quadrant ${i + 1} should have a bounding box`).not.toBeNull();
-			expect(box!.height, `Quadrant ${i + 1} should not collapse`).toBeGreaterThanOrEqual(60);
+			// Empty quadrants on mobile are collapsed to header-only (~57px)
+			expect(box!.height, `Quadrant ${i + 1} should not collapse`).toBeGreaterThanOrEqual(40);
 		}
 	});
 

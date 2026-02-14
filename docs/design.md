@@ -58,8 +58,13 @@ Unidirectional data flow: User action → View calls Plugin CRUD → Plugin save
 - **`isDesktopOnly: false`** — enables mobile Obsidian support
 - **Obsidian CSS variables** — theme-compatible colors that work in both light and dark mode
 - **Data schema versioning** — `version` field in persisted data for future migrations
+- **3-size type scale** — action (0.95em/700), body (0.85em/400), meta (0.7em/400/60% opacity). No other sizes.
+- **Subtle color system** — RGBA quadrant colors at 6% body / 15% header opacity. Color whispers, doesn't shout. Buttons inherit quadrant color.
+- **Progressive disclosure** — drag handles hidden until hover, mobile empty quadrants collapsed to header-only
 
 ## Recent Changes
+- Removed "Add date" toggle — date picker always visible in add-task form for faster task creation
+- Design overhaul: reduced quadrant color opacity (0.06/0.15), removed subtitles/title/footer, quadrant-colored buttons, 3-size type scale, hidden drag handles, no task borders, collapsed mobile empties, overflow fade hint, increased spacing
 - Task count badges in quadrant headers (hidden when 0), delete undo toast (5s Notice with Undo link), fixed desktop quadrant overflow clipping (`min-height: 0`), added desktop Playwright project
 - Added version footer (reads from manifest.json) and pre-commit hook for auto-bumping patch version on source changes
 - Add buttons use Obsidian's `setIcon("plus")` SVG for proper centering
