@@ -190,6 +190,57 @@ describe("EisenhowerMatrixPlugin", () => {
 		});
 	});
 
+	describe("restoreTask", () => {
+		it("restores a single deleted task", () => {
+			const plugin = createPlugin();
+			const task = plugin.addTask("To delete", Quadrant.Q1, null);
+			const taskCopy = { ...task };
+
+			plugin.deleteTask(task.id);
+			expect(plugin.data.tasks).toHaveLength(0);
+
+			plugin.restoreTask(taskCopy);
+			expect(plugin.data.tasks).toHaveLength(1);
+			expect(plugin.data.tasks[0].title).toBe("To delete");
+			expect(plugin.data.tasks[0].id).toBe(taskCopy.id);
+		});
+
+		it("restores multiple deleted tasks", () => {
+			const plugin = createPlugin();
+			const t1 = plugin.addTask("First", Quadrant.Q1, null);
+			const t2 = plugin.addTask("Second", Quadrant.Q2, null);
+			const copy1 = { ...t1 };
+			const copy2 = { ...t2 };
+
+			plugin.deleteTask(t1.id);
+			plugin.deleteTask(t2.id);
+			expect(plugin.data.tasks).toHaveLength(0);
+
+			plugin.restoreTask(copy1);
+			plugin.restoreTask(copy2);
+			expect(plugin.data.tasks).toHaveLength(2);
+			expect(plugin.data.tasks[0].title).toBe("First");
+			expect(plugin.data.tasks[1].title).toBe("Second");
+		});
+
+		it("preserves all task fields on restore", () => {
+			const plugin = createPlugin();
+			const task = plugin.addTask("With due date", Quadrant.Q3, "2025-12-25");
+			const taskCopy = { ...task };
+
+			plugin.deleteTask(task.id);
+			plugin.restoreTask(taskCopy);
+
+			const restored = plugin.data.tasks[0];
+			expect(restored.id).toBe(taskCopy.id);
+			expect(restored.title).toBe("With due date");
+			expect(restored.quadrant).toBe(Quadrant.Q3);
+			expect(restored.dueDate).toBe("2025-12-25");
+			expect(restored.createdAt).toBe(taskCopy.createdAt);
+			expect(restored.order).toBe(taskCopy.order);
+		});
+	});
+
 	describe("loadPluginData", () => {
 		it("initializes with DEFAULT_DATA when loadData returns null", async () => {
 			const plugin = createPlugin();

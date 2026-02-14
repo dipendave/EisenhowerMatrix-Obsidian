@@ -18,3 +18,4 @@ Track of development iterations and time estimates.
 | 2026-02-13 12:00 | ~15min | Fixed all 13 ObsidianReviewBot required issues (sentence case, promises, command ID/name, onunload, substr, innerHTML, async, inline styles) |
 | 2026-02-13 13:00 | ~10min | Centered add button (setIcon SVG), version footer, auto-bump pre-commit hook |
 | 2026-02-13 23:50 | ~5min | Fixed CI failures — added .npmrc with legacy-peer-deps, regenerated package-lock.json |
+| 2026-02-14 00:30 | ~30min | Task count badges, quadrant overflow fix (min-height:0), delete undo toast with Notice, restoreTask(), 3 new unit tests, 1 Playwright test, desktop project in config |

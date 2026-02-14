@@ -30,7 +30,8 @@ test.describe("Mobile layout — empty state", () => {
 		}
 	});
 
-	test("add buttons meet 44x44 mobile tap target", async ({ page }) => {
+	test("add buttons meet 44x44 mobile tap target", async ({ page, isMobile }) => {
+		test.skip(!isMobile, "Mobile-only test");
 		const buttons = page.locator("#empty-state .em-add-btn");
 		await expect(buttons).toHaveCount(4);
 
@@ -42,7 +43,8 @@ test.describe("Mobile layout — empty state", () => {
 		}
 	});
 
-	test("grid is scrollable (not overflow hidden)", async ({ page }) => {
+	test("grid is scrollable (not overflow hidden)", async ({ page, isMobile }) => {
+		test.skip(!isMobile, "Mobile-only test");
 		const overflow = await page.locator("#empty-state .em-grid").evaluate(
 			(el) => getComputedStyle(el).overflowY
 		);
@@ -120,12 +122,32 @@ test.describe("Mobile layout — constrained Obsidian workspace", () => {
 	});
 });
 
+test.describe("Desktop layout — overloaded quadrant scrolls", () => {
+	test.beforeEach(async ({ page }) => {
+		await page.goto(fixtureUrl);
+	});
+
+	test("Q1 task-list is scrollable when overloaded with tasks", async ({ page, isMobile }) => {
+		test.skip(!!isMobile, "Desktop-only test");
+
+		const result = await page.locator("#overloaded-state .em-quadrant-q1 .em-task-list").evaluate((el) => {
+			return {
+				scrollHeight: el.scrollHeight,
+				clientHeight: el.clientHeight,
+			};
+		});
+
+		expect(result.scrollHeight, "Task list should overflow and be scrollable").toBeGreaterThan(result.clientHeight);
+	});
+});
+
 test.describe("Mobile layout — scrollable container, no inner clipping", () => {
 	test.beforeEach(async ({ page }) => {
 		await page.goto(fixtureUrl);
 	});
 
-	test("em-container fills leaf and scrolls (not height:auto)", async ({ page }) => {
+	test("em-container fills leaf and scrolls (not height:auto)", async ({ page, isMobile }) => {
+		test.skip(!isMobile, "Mobile-only test");
 		const result = await page.locator("#empty-state .em-container").evaluate((el) => {
 			const style = getComputedStyle(el);
 			return {
@@ -140,14 +162,16 @@ test.describe("Mobile layout — scrollable container, no inner clipping", () =>
 		expect(result.overflowY, "Container should scroll").not.toBe("hidden");
 	});
 
-	test("em-matrix-wrapper does not clip overflow on mobile", async ({ page }) => {
+	test("em-matrix-wrapper does not clip overflow on mobile", async ({ page, isMobile }) => {
+		test.skip(!isMobile, "Mobile-only test");
 		const overflow = await page.locator("#empty-state .em-matrix-wrapper").evaluate(
 			(el) => getComputedStyle(el).overflowY
 		);
 		expect(overflow, "Matrix wrapper should not clip content").not.toBe("hidden");
 	});
 
-	test("inner elements use natural height (no flex:1 constraining)", async ({ page }) => {
+	test("inner elements use natural height (no flex:1 constraining)", async ({ page, isMobile }) => {
+		test.skip(!isMobile, "Mobile-only test");
 		const result = await page.locator("#empty-state .em-matrix-wrapper").evaluate((el) => {
 			const style = getComputedStyle(el);
 			return {
@@ -159,7 +183,8 @@ test.describe("Mobile layout — scrollable container, no inner clipping", () =>
 		expect(result.flexGrow, "Matrix wrapper should not use flex-grow").toBe("0");
 	});
 
-	test("em-quadrant does not clip overflow on mobile", async ({ page }) => {
+	test("em-quadrant does not clip overflow on mobile", async ({ page, isMobile }) => {
+		test.skip(!isMobile, "Mobile-only test");
 		const quadrants = page.locator("#empty-state .em-quadrant");
 		for (let i = 0; i < 4; i++) {
 			const overflow = await quadrants.nth(i).evaluate(

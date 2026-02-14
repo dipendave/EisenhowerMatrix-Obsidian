@@ -1,4 +1,4 @@
-import { ItemView, WorkspaceLeaf, setIcon } from "obsidian";
+import { ItemView, WorkspaceLeaf, setIcon, Notice } from "obsidian";
 import {
 	VIEW_TYPE_EISENHOWER,
 	Quadrant,
@@ -80,10 +80,15 @@ export class EisenhowerMatrixView extends ItemView {
 			attr: { "data-quadrant": meta.id },
 		});
 
+		const tasks = this.plugin.getTasksForQuadrant(meta.id);
+
 		// Header
 		const headerEl = quadrantEl.createDiv({ cls: "em-quadrant-header" });
 		const titleGroup = headerEl.createDiv({ cls: "em-quadrant-title-group" });
-		titleGroup.createEl("h3", { text: meta.action, cls: "em-quadrant-action" });
+		const h3 = titleGroup.createEl("h3", { text: meta.action, cls: "em-quadrant-action" });
+		if (tasks.length > 0) {
+			h3.createSpan({ text: ` ${tasks.length}`, cls: "em-task-count" });
+		}
 		titleGroup.createEl("span", { text: meta.label, cls: "em-quadrant-subtitle" });
 
 		const addBtn = headerEl.createEl("button", {
@@ -94,8 +99,6 @@ export class EisenhowerMatrixView extends ItemView {
 
 		// Task list
 		const listEl = quadrantEl.createDiv({ cls: "em-task-list" });
-
-		const tasks = this.plugin.getTasksForQuadrant(meta.id);
 		if (tasks.length === 0) {
 			this.renderEmptyState(listEl);
 		} else {
@@ -255,9 +258,29 @@ export class EisenhowerMatrixView extends ItemView {
 	}
 
 	private async handleDeleteTask(taskId: string): Promise<void> {
+		const savedTask = this.plugin.data.tasks.find((t) => t.id === taskId);
+		if (!savedTask) return;
+		const taskCopy = { ...savedTask };
+
 		this.plugin.deleteTask(taskId);
 		await this.plugin.savePluginData();
 		this.renderMatrix();
+
+		const fragment = document.createDocumentFragment();
+		fragment.appendText("Task deleted. ");
+		const undoLink = fragment.createEl("a", { text: "Undo", cls: "em-undo-link" });
+		undoLink.style.cursor = "pointer";
+		undoLink.style.fontWeight = "bold";
+		undoLink.style.textDecoration = "underline";
+
+		const notice = new Notice(fragment, 5000);
+
+		undoLink.addEventListener("click", async () => {
+			this.plugin.restoreTask(taskCopy);
+			await this.plugin.savePluginData();
+			this.renderMatrix();
+			notice.hide();
+		});
 	}
 
 	private async handleEditTask(taskId: string, title: string, dueDate: string | null): Promise<void> {

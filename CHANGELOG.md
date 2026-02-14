@@ -4,6 +4,31 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2026-02-14 00:30] - Task Count Badges, Quadrant Overflow Fix, Delete Undo Toast
+
+**Added:**
+- Task count badges in quadrant headers — shows count (e.g., "DO 3") when tasks exist, hidden when empty
+- Delete undo toast — 5-second Notice with "Undo" link that restores the deleted task
+- `restoreTask()` method on plugin for undoing deletions
+- Desktop Playwright project and overflow scroll test
+- Overloaded-state fixture (8 tasks in Q1) for Playwright testing
+
+**Fixed:**
+- Quadrant content clipping on desktop when many tasks — added `min-height: 0` to `.em-quadrant` so CSS grid children can shrink and `.em-task-list` scrolls properly
+- Mobile-only Playwright tests now skip on desktop project (added `isMobile` guards)
+
+**Files:**
+- `src/view.ts`
+- `src/main.ts`
+- `styles.css`
+- `tests/__mocks__/obsidian.ts`
+- `tests/main.test.ts`
+- `tests/fixtures/matrix.html`
+- `tests/mobile.spec.ts`
+- `playwright.config.ts`
+
+---
+
 ## [2026-02-13 23:50] - Fix CI peer dependency failures
 
 **Fixed:**

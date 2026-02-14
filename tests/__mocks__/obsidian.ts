@@ -42,3 +42,17 @@ export class ItemView {
 }
 
 export class WorkspaceLeaf {}
+
+export class Notice {
+	message: string | DocumentFragment;
+	duration: number;
+
+	constructor(message: string | DocumentFragment, duration?: number) {
+		this.message = message;
+		this.duration = duration ?? 5000;
+	}
+
+	hide(): void {}
+}
+
+export function setIcon(_el: HTMLElement, _iconId: string): void {}

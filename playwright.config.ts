@@ -20,5 +20,12 @@ export default defineConfig({
 				isMobile: true,
 			},
 		},
+		{
+			name: "desktop",
+			use: {
+				browserName: "chromium",
+				viewport: { width: 1280, height: 720 },
+			},
+		},
 	],
 });

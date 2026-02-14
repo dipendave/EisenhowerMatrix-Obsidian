@@ -31,12 +31,12 @@ Unidirectional data flow: User action → View calls Plugin CRUD → Plugin save
 ### EisenhowerMatrixPlugin (`src/main.ts`)
 - Purpose: Plugin lifecycle, data ownership, task CRUD operations
 - Dependencies: `obsidian` (Plugin, WorkspaceLeaf)
-- Key interfaces: `onload()`, `activateView()`, `addTask()`, `editTask()`, `deleteTask()`, `moveTask()`, `getTasksForQuadrant()`
+- Key interfaces: `onload()`, `activateView()`, `addTask()`, `editTask()`, `deleteTask()`, `restoreTask()`, `moveTask()`, `getTasksForQuadrant()`
 
 ### EisenhowerMatrixView (`src/view.ts`)
 - Purpose: Renders the 2x2 matrix UI, handles all user interactions
 - Dependencies: `obsidian` (ItemView), Plugin instance, Types
-- Key interfaces: `renderMatrix()`, desktop drag (HTML5 API), mobile touch drag (250ms long-press), inline add/delete/edit forms
+- Key interfaces: `renderMatrix()`, desktop drag (HTML5 API), mobile touch drag (250ms long-press), inline add/delete/edit forms, delete undo toast (5s Notice with restore)
 - Exported utilities: `formatDueDate(dateStr)`, `isDueDatePast(dateStr)` — extracted for testability
 
 ### Types (`src/types.ts`)
@@ -60,6 +60,7 @@ Unidirectional data flow: User action → View calls Plugin CRUD → Plugin save
 - **Data schema versioning** — `version` field in persisted data for future migrations
 
 ## Recent Changes
+- Task count badges in quadrant headers (hidden when 0), delete undo toast (5s Notice with Undo link), fixed desktop quadrant overflow clipping (`min-height: 0`), added desktop Playwright project
 - Added version footer (reads from manifest.json) and pre-commit hook for auto-bumping patch version on source changes
 - Add buttons use Obsidian's `setIcon("plus")` SVG for proper centering
 - Addressed all ObsidianReviewBot required issues: sentence case UI text, void-operator for unhandled promises, removed plugin ID from command ID, removed plugin name from command name, removed onunload leaf detach, replaced deprecated substr, replaced innerHTML with textContent, moved inline styles to CSS class, made async event handlers synchronous with void
