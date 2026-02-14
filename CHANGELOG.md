@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2026-02-13 23:50] - Fix CI peer dependency failures
+
+**Fixed:**
+- CI `npm ci` failing due to peer dependency conflicts from `eslint-plugin-obsidianmd` (eslint ^10 vs plugins expecting ^9, typescript 4.7.4 vs >=4.8.4)
+- Added `.npmrc` with `legacy-peer-deps=true` so CI resolves deps the same way as local
+- Regenerated `package-lock.json` with clean dependency tree
+
+**Files:**
+- `.npmrc`
+- `package-lock.json`
+
+---
+
 ## [2026-02-13 13:00] - Plus Icon, Version Footer, Auto-Bump
 
 **Added:**

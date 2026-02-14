@@ -20,6 +20,7 @@ tests/
     view.test.ts ── date utility tests
     types.test.ts ── constants validation
 
+.npmrc ── npm config (legacy-peer-deps for eslint plugin compat)
 .github/workflows/ci.yml ── CI pipeline (test + build)
 ```
 
