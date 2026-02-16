@@ -42,7 +42,7 @@ Prioritize your tasks by urgency and importance, right inside Obsidian.
 
 ## Usage
 
-Open the matrix from the ribbon icon or the command palette (**Open Eisenhower Matrix**).
+Open the matrix from the ribbon icon or the command palette (**Eisenhower Matrix: Open matrix**).
 
 - **Add a task** — tap the **+** button in any quadrant
 - **Edit a task** — click on it to change the title or due date
