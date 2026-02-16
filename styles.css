@@ -533,6 +533,13 @@
 	}
 }
 
+/* ===== UNDO TOAST ===== */
+.em-undo-link {
+	cursor: pointer;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
 /* ===== DARK THEME ===== */
 .theme-dark .em-task:hover {
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);

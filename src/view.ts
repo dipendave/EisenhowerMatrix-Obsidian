@@ -268,15 +268,12 @@ export class EisenhowerMatrixView extends ItemView {
 		const fragment = document.createDocumentFragment();
 		fragment.appendText("Task deleted. ");
 		const undoLink = fragment.createEl("a", { text: "Undo", cls: "em-undo-link" });
-		undoLink.style.cursor = "pointer";
-		undoLink.style.fontWeight = "bold";
-		undoLink.style.textDecoration = "underline";
 
 		const notice = new Notice(fragment, 5000);
 
-		undoLink.addEventListener("click", async () => {
+		undoLink.addEventListener("click", () => {
 			this.plugin.restoreTask(taskCopy);
-			await this.plugin.savePluginData();
+			void this.plugin.savePluginData();
 			this.renderMatrix();
 			notice.hide();
 		});
