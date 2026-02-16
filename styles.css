@@ -11,31 +11,48 @@
 /* ===== MATRIX WRAPPER ===== */
 .em-matrix-wrapper {
 	flex: 1;
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-template-rows: auto 1fr;
 	min-height: 0;
 	overflow: hidden;
 }
 
 .em-axis-label {
-	display: flex;
-	justify-content: space-around;
 	font-size: 0.7em;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
 	opacity: 0.6;
 	font-weight: 600;
 	padding: 4px 0;
-	flex-shrink: 0;
+}
+
+.em-axis-urgency {
+	grid-column: 2;
+	grid-row: 1;
+	display: flex;
+	justify-content: space-around;
+}
+
+.em-axis-importance {
+	grid-column: 1;
+	grid-row: 2;
+	writing-mode: vertical-lr;
+	transform: rotate(180deg);
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	padding: 0 4px;
 }
 
 /* ===== GRID ===== */
 .em-grid {
+	grid-column: 2;
+	grid-row: 2;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: 1fr 1fr;
 	gap: 12px;
-	flex: 1;
 	min-height: 0;
 	overflow: hidden;
 }
@@ -188,8 +205,8 @@
 	position: sticky;
 	bottom: 0;
 	display: block;
-	height: 20px;
-	margin-top: -20px;
+	height: 30px;
+	margin-top: -30px;
 	background: linear-gradient(transparent, var(--background-primary-alt, rgba(255, 255, 255, 0.5)));
 	pointer-events: none;
 	border-radius: 0 0 6px 6px;
@@ -220,7 +237,7 @@
 
 .em-task-drag-handle {
 	font-size: 12px;
-	opacity: 0;
+	opacity: 0.15;
 	cursor: grab;
 	flex-shrink: 0;
 	user-select: none;
@@ -234,6 +251,13 @@
 .em-task-content {
 	flex: 1;
 	min-width: 0;
+	cursor: pointer;
+	border-radius: 4px;
+	transition: background 0.15s;
+}
+
+.em-task-content:hover {
+	background: rgba(0, 0, 0, 0.04);
 }
 
 .em-task-title {
@@ -437,9 +461,15 @@
 	}
 
 	.em-matrix-wrapper {
+		display: flex;
+		flex-direction: column;
 		flex: none;
 		min-height: auto;
 		overflow: visible;
+	}
+
+	.em-axis-importance {
+		display: none;
 	}
 
 	.em-grid {
@@ -506,4 +536,18 @@
 /* ===== DARK THEME ===== */
 .theme-dark .em-task:hover {
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.theme-dark .em-task-content:hover {
+	background: rgba(255, 255, 255, 0.06);
+}
+
+.theme-dark .em-quadrant-q3 {
+	background: rgba(245, 158, 11, 0.10);
+	border-color: rgba(245, 158, 11, 0.20);
+}
+
+.theme-dark .em-quadrant-q3 .em-quadrant-header {
+	background: rgba(245, 158, 11, 0.20);
+	border-bottom-color: rgba(245, 158, 11, 0.20);
 }

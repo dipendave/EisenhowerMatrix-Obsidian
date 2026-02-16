@@ -143,6 +143,36 @@ test.describe("Desktop layout — overloaded quadrant scrolls", () => {
 	});
 });
 
+test.describe("Axis labels", () => {
+	test.beforeEach(async ({ page }) => {
+		await page.goto(fixtureUrl);
+	});
+
+	test("importance axis label is hidden on mobile", async ({ page, isMobile }) => {
+		test.skip(!isMobile, "Mobile-only test");
+		const display = await page.locator("#empty-state .em-axis-importance").evaluate(
+			(el) => getComputedStyle(el).display
+		);
+		expect(display).toBe("none");
+	});
+
+	test("importance axis label is visible on desktop", async ({ page, isMobile }) => {
+		test.skip(!!isMobile, "Desktop-only test");
+		const box = await page.locator("#populated-state .em-axis-importance").boundingBox();
+		expect(box, "Importance label should have a bounding box").not.toBeNull();
+		expect(box!.width, "Importance label width").toBeGreaterThan(0);
+		expect(box!.height, "Importance label height").toBeGreaterThan(0);
+	});
+
+	test("mobile layout still uses flex column on matrix wrapper", async ({ page, isMobile }) => {
+		test.skip(!isMobile, "Mobile-only test");
+		const display = await page.locator("#empty-state .em-matrix-wrapper").evaluate(
+			(el) => getComputedStyle(el).display
+		);
+		expect(display).toBe("flex");
+	});
+});
+
 test.describe("Mobile layout — scrollable container, no inner clipping", () => {
 	test.beforeEach(async ({ page }) => {
 		await page.goto(fixtureUrl);

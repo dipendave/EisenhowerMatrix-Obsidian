@@ -4,6 +4,28 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2026-02-15 12:00] - Design Evaluation Improvements
+
+**Changed:**
+- Added vertical "IMPORTANT / NOT IMPORTANT" axis label on desktop (grid layout), hidden on mobile
+- Task content now shows hover highlight to hint at click-to-edit editability
+- Drag handles show at 15% opacity by default (was invisible until hover)
+- Dark mode Q3 (Delegate) orange is brighter and more distinct (was muddy)
+- Overflow fade hint is taller (30px, was 20px) for better scroll signaling
+- Empty state text changed from "No tasks yet" to "Tap + to add a task" for actionable guidance
+- Matrix wrapper converted from flex to CSS grid on desktop for dual-axis label placement
+
+**Added:**
+- 3 new Playwright tests for axis label visibility (hidden on mobile, visible on desktop, mobile uses flex layout)
+
+**Files:**
+- `styles.css`
+- `src/view.ts`
+- `tests/fixtures/matrix.html`
+- `tests/mobile.spec.ts`
+
+---
+
 ## [2026-02-13 16:00] - Fix Version Inconsistencies + README Screenshot Refresh
 
 **Fixed:**

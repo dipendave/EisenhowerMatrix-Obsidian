@@ -57,6 +57,11 @@ export class EisenhowerMatrixView extends ItemView {
 		urgencyLabel.createSpan({ text: "URGENT", cls: "em-axis-left" });
 		urgencyLabel.createSpan({ text: "NOT URGENT", cls: "em-axis-right" });
 
+		// Importance axis label (vertical)
+		const importanceLabel = matrixWrapper.createDiv({ cls: "em-axis-label em-axis-importance" });
+		importanceLabel.createSpan({ text: "NOT IMPORTANT", cls: "em-axis-bottom" });
+		importanceLabel.createSpan({ text: "IMPORTANT", cls: "em-axis-top" });
+
 		// Grid
 		const grid = matrixWrapper.createDiv({ cls: "em-grid" });
 
@@ -240,7 +245,7 @@ export class EisenhowerMatrixView extends ItemView {
 	}
 
 	private renderEmptyState(listEl: HTMLElement): void {
-		listEl.createDiv({ cls: "em-empty-state", text: "No tasks yet" });
+		listEl.createDiv({ cls: "em-empty-state", text: "Tap + to add a task" });
 	}
 
 	// ==================== TASK ACTIONS ====================

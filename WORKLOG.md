@@ -23,3 +23,4 @@ Track of development iterations and time estimates.
 | 2026-02-14 01:30 | ~30min | Design overhaul — reduced color opacity, removed subtitles/title/footer, quadrant-colored buttons, 3-size type scale, hidden drag handles, collapsed mobile empties, date toggle, overflow fade hint |
 | 2026-02-14 02:00 | ~5min | Removed "Add date" toggle — date picker always visible in add-task form |
 | 2026-02-13 16:00 | ~15min | Fixed version inconsistencies (package.json 1.0.3, bump script, pre-commit), added populated fixture, Playwright screenshot script, rewrote README with new screenshots |
+| 2026-02-15 12:00 | ~15min | Design evaluation improvements — vertical importance axis label, task edit/drag hover hints, dark Q3 orange fix, taller overflow fade, actionable empty state text, 3 new Playwright tests |

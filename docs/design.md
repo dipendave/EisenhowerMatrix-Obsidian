@@ -12,7 +12,7 @@ Plugin (main.ts) ── owns data, CRUD operations, persistence
             │
             └── Types (types.ts) ── interfaces, enums, constants
 
-styles.css ── grid layout, colors, responsive breakpoints
+styles.css ── CSS grid wrapper (dual-axis labels), quadrant colors, responsive breakpoints
 
 tests/
     __mocks__/obsidian.ts ── manual mock for obsidian module
@@ -60,9 +60,11 @@ Unidirectional data flow: User action → View calls Plugin CRUD → Plugin save
 - **Data schema versioning** — `version` field in persisted data for future migrations
 - **3-size type scale** — action (0.95em/700), body (0.85em/400), meta (0.7em/400/60% opacity). No other sizes.
 - **Subtle color system** — RGBA quadrant colors at 6% body / 15% header opacity. Color whispers, doesn't shout. Buttons inherit quadrant color.
-- **Progressive disclosure** — drag handles hidden until hover, mobile empty quadrants collapsed to header-only
+- **Progressive disclosure** — drag handles faintly visible (0.15 opacity), brighten on hover; mobile empty quadrants collapsed to header-only
+- **Dual-axis labels** — desktop uses CSS grid on `.em-matrix-wrapper` (`grid-template-columns: auto 1fr; grid-template-rows: auto 1fr`) to place urgency (horizontal) and importance (vertical, `writing-mode: vertical-lr; rotate(180deg)`) axis labels. Mobile reverts to flex column and hides the importance label.
 
 ## Recent Changes
+- Design evaluation improvements: vertical importance axis label (CSS grid layout), task content hover hint, drag handle default opacity 0.15, dark mode Q3 orange fix, taller overflow fade, actionable empty state text, 3 new Playwright tests
 - Fixed version inconsistencies: package.json synced to 1.0.3, bump script and pre-commit hook now include package.json
 - Added Playwright-based screenshot capture script (`scripts/capture-readme-screenshots.mjs`) for automated README screenshots (4 retina shots: desktop light/dark, overloaded, mobile)
 - Added populated fixture state in `tests/fixtures/matrix.html` with 10 realistic tasks across all quadrants
