@@ -1,4 +1,4 @@
-import { ItemView, WorkspaceLeaf, setIcon, Notice } from "obsidian";
+import { ItemView, WorkspaceLeaf, setIcon, Notice, Platform } from "obsidian";
 import {
 	VIEW_TYPE_EISENHOWER,
 	Quadrant,
@@ -35,6 +35,11 @@ export class EisenhowerMatrixView extends ItemView {
 
 	onOpen(): Promise<void> {
 		this.renderMatrix();
+		if (Platform.isMobile && !this.plugin.data.hasSeenDragHint) {
+			new Notice("Long-press a task to drag it between quadrants", 5000);
+			this.plugin.data.hasSeenDragHint = true;
+			void this.plugin.savePluginData();
+		}
 		return Promise.resolve();
 	}
 
@@ -71,6 +76,14 @@ export class EisenhowerMatrixView extends ItemView {
 			this.renderQuadrant(grid, QUADRANT_META[q]);
 		}
 
+		requestAnimationFrame(() => this.updateOverflowIndicators());
+	}
+
+	private updateOverflowIndicators(): void {
+		this.contentEl.querySelectorAll(".em-task-list").forEach((el) => {
+			const list = el as HTMLElement;
+			list.toggleClass("em-has-overflow", list.scrollHeight > list.clientHeight);
+		});
 	}
 
 	private renderQuadrant(gridEl: HTMLElement, meta: QuadrantMeta): void {
@@ -245,15 +258,19 @@ export class EisenhowerMatrixView extends ItemView {
 	}
 
 	private renderEmptyState(listEl: HTMLElement): void {
-		listEl.createDiv({ cls: "em-empty-state", text: "Tap + to add a task" });
+		listEl.createDiv({ cls: "em-empty-state", text: "Tap + to add, tap a task to edit" });
 	}
 
 	// ==================== TASK ACTIONS ====================
 
 	private async handleAddTask(quadrant: Quadrant, title: string, dueDate: string | null): Promise<void> {
-		this.plugin.addTask(title, quadrant, dueDate);
+		const newTask = this.plugin.addTask(title, quadrant, dueDate);
 		await this.plugin.savePluginData();
 		this.renderMatrix();
+		const newTaskEl = this.contentEl.querySelector(`[data-task-id="${newTask.id}"]`);
+		if (newTaskEl) {
+			(newTaskEl as HTMLElement).addClass("em-task-new");
+		}
 	}
 
 	private async handleDeleteTask(taskId: string): Promise<void> {

@@ -80,9 +80,13 @@
 .em-quadrant-q1 .em-quadrant-action {
 	color: #ef4444;
 }
-.em-quadrant-q1 .em-add-btn,
-.em-quadrant-q1 .em-form-submit {
+.em-quadrant-q1 .em-add-btn {
 	border: 1.5px solid rgba(239, 68, 68, 0.4);
+	color: #ef4444;
+}
+.em-quadrant-q1 .em-form-submit {
+	background: rgba(239, 68, 68, 0.12);
+	border-color: rgba(239, 68, 68, 0.4);
 	color: #ef4444;
 }
 
@@ -98,9 +102,13 @@
 .em-quadrant-q2 .em-quadrant-action {
 	color: #3b82f6;
 }
-.em-quadrant-q2 .em-add-btn,
-.em-quadrant-q2 .em-form-submit {
+.em-quadrant-q2 .em-add-btn {
 	border: 1.5px solid rgba(59, 130, 246, 0.4);
+	color: #3b82f6;
+}
+.em-quadrant-q2 .em-form-submit {
+	background: rgba(59, 130, 246, 0.12);
+	border-color: rgba(59, 130, 246, 0.4);
 	color: #3b82f6;
 }
 
@@ -116,9 +124,13 @@
 .em-quadrant-q3 .em-quadrant-action {
 	color: #f59e0b;
 }
-.em-quadrant-q3 .em-add-btn,
-.em-quadrant-q3 .em-form-submit {
+.em-quadrant-q3 .em-add-btn {
 	border: 1.5px solid rgba(245, 158, 11, 0.4);
+	color: #f59e0b;
+}
+.em-quadrant-q3 .em-form-submit {
+	background: rgba(245, 158, 11, 0.12);
+	border-color: rgba(245, 158, 11, 0.4);
 	color: #f59e0b;
 }
 
@@ -134,9 +146,13 @@
 .em-quadrant-q4 .em-quadrant-action {
 	color: #6b7280;
 }
-.em-quadrant-q4 .em-add-btn,
-.em-quadrant-q4 .em-form-submit {
+.em-quadrant-q4 .em-add-btn {
 	border: 1.5px solid rgba(107, 114, 128, 0.4);
+	color: #6b7280;
+}
+.em-quadrant-q4 .em-form-submit {
+	background: rgba(107, 114, 128, 0.12);
+	border-color: rgba(107, 114, 128, 0.4);
 	color: #6b7280;
 }
 
@@ -203,17 +219,21 @@
 	position: relative;
 }
 
-/* Overflow fade hint — "scroll for more" signal */
+/* Overflow fade hint — only shown when content overflows */
 .em-task-list::after {
 	content: "";
 	position: sticky;
 	bottom: 0;
-	display: block;
+	display: none;
 	height: 30px;
 	margin-top: -30px;
 	background: linear-gradient(transparent, rgba(239, 68, 68, 0.06));
 	pointer-events: none;
 	border-radius: 0 0 6px 6px;
+}
+
+.em-task-list.em-has-overflow::after {
+	display: block;
 }
 
 .em-quadrant-q1 .em-task-list::after { background: linear-gradient(transparent, rgba(239, 68, 68, 0.06)); }
@@ -379,14 +399,15 @@
 }
 
 .em-form-submit {
-	background: transparent;
+	background: var(--background-modifier-border);
 	color: var(--text-normal);
-	border: 1.5px solid var(--background-modifier-border);
+	border: 1.5px solid transparent;
 }
 
 .em-form-cancel {
-	background: var(--background-modifier-border);
+	background: transparent;
 	color: var(--text-normal);
+	border: 1.5px solid var(--background-modifier-border);
 }
 
 /* ===== EDIT FORM (INLINE) ===== */
@@ -545,6 +566,16 @@
 	.em-add-form {
 		padding: 6px;
 	}
+}
+
+/* ===== NEW TASK HIGHLIGHT ===== */
+@keyframes em-highlight-new {
+	from { background: rgba(0, 0, 0, 0.08); }
+	to { background: var(--background-primary); }
+}
+
+.em-task-new {
+	animation: em-highlight-new 600ms ease-out;
 }
 
 /* ===== UNDO TOAST ===== */

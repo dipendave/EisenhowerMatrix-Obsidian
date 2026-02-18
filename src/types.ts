@@ -56,6 +56,7 @@ export interface Task {
 export interface EisenhowerMatrixData {
 	tasks: Task[];
 	version: number;
+	hasSeenDragHint?: boolean;
 }
 
 export const DEFAULT_DATA: EisenhowerMatrixData = {

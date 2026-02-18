@@ -59,11 +59,12 @@ Unidirectional data flow: User action → View calls Plugin CRUD → Plugin save
 - **Obsidian CSS variables** — theme-compatible colors that work in both light and dark mode
 - **Data schema versioning** — `version` field in persisted data for future migrations
 - **3-size type scale** — action (0.95em/700), body (0.85em/400), meta (0.7em/400/60% opacity). No other sizes.
-- **Subtle color system** — RGBA quadrant colors at 6% body / 15% header opacity. Color whispers, doesn't shout. All interactive elements (+ button, form submit) inherit quadrant color as ghost buttons. Overflow fade gradient matches per-quadrant tint.
-- **Progressive disclosure** — drag handles faintly visible (0.15 opacity), brighten on hover; mobile empty quadrants collapsed to header-only
+- **Subtle color system** — RGBA quadrant colors at 6% body / 15% header opacity. Color whispers, doesn't shout. Add buttons are ghost (outline), form submit buttons are solid with per-quadrant tinted background. Overflow fade gradient matches per-quadrant tint and only appears when content overflows.
+- **Progressive disclosure** — drag handles faintly visible (0.15 opacity), brighten on hover; mobile empty quadrants collapsed to header-only; one-time mobile drag onboarding notice; new task highlight animation (600ms fade)
 - **Dual-axis labels** — desktop uses CSS grid on `.em-matrix-wrapper` (`grid-template-columns: auto 1fr; grid-template-rows: auto 1fr`) to place urgency (horizontal) and importance (vertical, `writing-mode: vertical-lr; rotate(180deg)`) axis labels. Mobile reverts to flex column and hides the importance label.
 
 ## Recent Changes
+- Design evaluation polish (2026-02-17): conditional overflow fade (only when content overflows), inverted Add/Cancel button weight hierarchy, edit discoverability in empty state text, one-time mobile drag onboarding notice, new task highlight animation on creation
 - Design polish (2026-02-17): form submit button changed to ghost style with quadrant color (eliminated last purple accent), overflow fade gradient matched to per-quadrant backgrounds, dark mode Q3 tuned from 0.10 to 0.08, empty state text vertically centered
 - Follow-up design review (2026-02-16): verified all 5 priority fixes from initial review landed correctly (color opacity, subtitles, drag handles, card borders, title/footer), identified 7 remaining polish items (purple form submit button, always-visible date row, empty state centering, overflow gradient color mismatch, dark Q3 weight tuning, mobile button sizing, task card left-border color tags). Added screenshot capture script and 7 follow-up screenshots.
 - Design evaluation improvements: vertical importance axis label (CSS grid layout), task content hover hint, drag handle default opacity 0.15, dark mode Q3 orange fix, taller overflow fade, actionable empty state text, 3 new Playwright tests

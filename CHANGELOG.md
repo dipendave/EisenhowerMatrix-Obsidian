@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2026-02-17 15:30] - Design Evaluation Polish (5 Items)
+
+**Changed:**
+- Overflow fade on task lists is now conditional — only shown when content actually overflows via `em-has-overflow` class toggled in `updateOverflowIndicators()`
+- Inverted Add/Cancel button weight hierarchy — Add/Save is now solid (tinted background), Cancel is ghost (transparent with border)
+- Per-quadrant colored submit buttons with `rgba(color, 0.12)` background and `rgba(color, 0.4)` border
+- Empty state text updated from "Tap + to add a task" to "Tap + to add, tap a task to edit" for edit discoverability
+- One-time mobile drag onboarding notice on first open: "Long-press a task to drag it between quadrants"
+- New task highlight animation (`em-highlight-new`, 600ms ease-out background fade) confirms successful task creation
+- Added `hasSeenDragHint` to `EisenhowerMatrixData` interface for persisting one-time mobile onboarding
+- Added `Platform` export to obsidian mock for unit test compatibility
+
+**Files:**
+- `styles.css`
+- `src/view.ts`
+- `src/types.ts`
+- `tests/__mocks__/obsidian.ts`
+- `tests/fixtures/matrix.html`
+
+---
+
 ## [2026-02-17 12:00] - Design Polish: Form Buttons, Overflow Fade, Dark Mode Q3
 
 **Changed:**
