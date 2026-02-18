@@ -176,7 +176,7 @@ export class EisenhowerMatrixView extends ItemView {
 			cls: "em-task-delete",
 			attr: { "aria-label": "Delete task" },
 		});
-		deleteBtn.textContent = "\u00d7";
+		setIcon(deleteBtn, "x");
 
 		deleteBtn.addEventListener("click", (e) => {
 			e.stopPropagation();

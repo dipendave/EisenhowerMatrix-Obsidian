@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2026-02-17 16:30] - Design Eval Refinements: Overflow Fade, Dark Highlight, SVG Icons
+
+**Changed:**
+- Overflow fade gradient strengthened from 0.06 to 0.15 opacity — now visibly signals "scroll for more"
+- Dark mode task creation highlight uses white flash (`rgba(255,255,255,0.08)`) instead of invisible black
+- Delete button changed from Unicode × to SVG icon via `setIcon("x")` for visual consistency with + button
+- Desktop click-to-edit hover background increased (0.04 to 0.06 light, 0.06 to 0.08 dark) for better affordance
+- Added `em-has-overflow` class to overloaded fixture for screenshot verification
+- Updated README feature table with creation feedback and mobile onboarding
+- Refreshed all README and design-review screenshots
+
+**Files:**
+- `styles.css`
+- `src/view.ts`
+- `tests/fixtures/matrix.html`
+- `README.md`
+- `screenshots/*.png`
+- `screenshots/design-review/*.png`
+
+---
+
 ## [2026-02-17 15:30] - Design Evaluation Polish (5 Items)
 
 **Changed:**

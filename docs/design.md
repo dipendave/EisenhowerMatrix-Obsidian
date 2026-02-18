@@ -64,6 +64,7 @@ Unidirectional data flow: User action → View calls Plugin CRUD → Plugin save
 - **Dual-axis labels** — desktop uses CSS grid on `.em-matrix-wrapper` (`grid-template-columns: auto 1fr; grid-template-rows: auto 1fr`) to place urgency (horizontal) and importance (vertical, `writing-mode: vertical-lr; rotate(180deg)`) axis labels. Mobile reverts to flex column and hides the importance label.
 
 ## Recent Changes
+- Design eval refinements (2026-02-17): stronger overflow fade (0.06 to 0.15), dark mode task highlight animation, SVG delete icon (setIcon), stronger edit hover affordance
 - Design evaluation polish (2026-02-17): conditional overflow fade (only when content overflows), inverted Add/Cancel button weight hierarchy, edit discoverability in empty state text, one-time mobile drag onboarding notice, new task highlight animation on creation
 - Design polish (2026-02-17): form submit button changed to ghost style with quadrant color (eliminated last purple accent), overflow fade gradient matched to per-quadrant backgrounds, dark mode Q3 tuned from 0.10 to 0.08, empty state text vertically centered
 - Follow-up design review (2026-02-16): verified all 5 priority fixes from initial review landed correctly (color opacity, subtitles, drag handles, card borders, title/footer), identified 7 remaining polish items (purple form submit button, always-visible date row, empty state centering, overflow gradient color mismatch, dark Q3 weight tuning, mobile button sizing, task card left-border color tags). Added screenshot capture script and 7 follow-up screenshots.

@@ -17,8 +17,9 @@ Prioritize your tasks by urgency and importance, right inside Obsidian.
 | **Inline editing** | Click any task to edit its title or due date in place |
 | **Task count badges** | Each quadrant header shows the number of tasks at a glance |
 | **Undo on delete** | Accidentally deleted a task? A 5-second toast lets you undo instantly |
-| **Overflow scrolling** | Quadrants scroll individually when you have lots of tasks — with a fade hint |
-| **Mobile friendly** | Responsive stacked layout that works on phones and tablets |
+| **Overflow scrolling** | Quadrants scroll individually when overloaded — with a color-matched fade indicator |
+| **Creation feedback** | New tasks appear with a subtle highlight animation so you see them land |
+| **Mobile friendly** | Responsive stacked layout with drag onboarding on first use |
 | **Theme aware** | Adapts to your light or dark Obsidian theme |
 
 ### Dark mode

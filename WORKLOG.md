@@ -27,3 +27,4 @@ Track of development iterations and time estimates.
 | 2026-02-16 14:00 | ~30min | Follow-up design review — captured 7 fresh screenshots via Playwright, evaluated all fixes from initial review, documented 7 remaining polish issues, updated DESIGN_REVIEW.md with before/after comparison |
 | 2026-02-17 12:00 | ~15min | Design polish — ghost submit button with quadrant color, per-quadrant overflow fade gradient, dark mode Q3 tuned to 0.08, vertically centered empty state text |
 | 2026-02-17 15:30 | ~15min | Design evaluation polish (5 items) — conditional overflow fade, inverted button weight, edit discoverability text, mobile drag onboarding notice, new task highlight animation |
+| 2026-02-17 16:30 | ~15min | Design eval refinements — stronger overflow fade (0.15), dark mode highlight, SVG delete icon, edit hover affordance, refreshed README + screenshots |
