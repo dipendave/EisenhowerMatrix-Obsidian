@@ -24,3 +24,5 @@ Track of development iterations and time estimates.
 | 2026-02-14 02:00 | ~5min | Removed "Add date" toggle — date picker always visible in add-task form |
 | 2026-02-13 16:00 | ~15min | Fixed version inconsistencies (package.json 1.0.3, bump script, pre-commit), added populated fixture, Playwright screenshot script, rewrote README with new screenshots |
 | 2026-02-15 12:00 | ~15min | Design evaluation improvements — vertical importance axis label, task edit/drag hover hints, dark Q3 orange fix, taller overflow fade, actionable empty state text, 3 new Playwright tests |
+| 2026-02-16 14:00 | ~30min | Follow-up design review — captured 7 fresh screenshots via Playwright, evaluated all fixes from initial review, documented 7 remaining polish issues, updated DESIGN_REVIEW.md with before/after comparison |
+| 2026-02-17 12:00 | ~15min | Design polish — ghost submit button with quadrant color, per-quadrant overflow fade gradient, dark mode Q3 tuned to 0.08, vertically centered empty state text |

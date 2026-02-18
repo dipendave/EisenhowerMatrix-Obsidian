@@ -4,6 +4,43 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2026-02-17 12:00] - Design Polish: Form Buttons, Overflow Fade, Dark Mode Q3
+
+**Changed:**
+- Form submit button changed from purple `var(--interactive-accent)` to ghost button with quadrant-colored border (matches + button style)
+- Overflow fade gradient now uses per-quadrant background colors instead of generic `--background-primary-alt`
+- Dark mode Q3 (Delegate) opacity dialed back from 0.10/0.20 to 0.08/0.18 for better balance with other quadrants
+- Empty state text vertically centered within quadrants
+
+**Files:**
+- `styles.css`
+
+---
+
+## [2026-02-16 14:00] - Follow-up Design Review with Fresh Screenshots
+
+**Added:**
+- Follow-up design review (`DESIGN_REVIEW.md`) evaluating all changes since the initial 2026-02-14 review
+- `scripts/capture-design-review-screenshots.mjs` — Playwright screenshot capture for design review (7 screenshots: desktop populated/dark/empty/overloaded/form-open, mobile populated/empty)
+- 7 new follow-up screenshots in `screenshots/design-review/followup-*.png`
+
+**Changed:**
+- Updated `DESIGN_REVIEW.md` from initial review to follow-up format: documents what was fixed, verifies fixes via fresh screenshots, identifies 7 remaining polish issues (purple form button, always-visible date row, empty state spacing, overflow gradient color mismatch, dark mode Q3 weight, mobile button sizing, task card color tags)
+- Graded current state B+ (up from C+ at initial review), with clear path to A-tier documented
+
+**Files:**
+- `DESIGN_REVIEW.md`
+- `scripts/capture-design-review-screenshots.mjs`
+- `screenshots/design-review/followup-desktop-populated.png`
+- `screenshots/design-review/followup-desktop-dark.png`
+- `screenshots/design-review/followup-desktop-empty.png`
+- `screenshots/design-review/followup-desktop-overloaded.png`
+- `screenshots/design-review/followup-desktop-form-open.png`
+- `screenshots/design-review/followup-mobile-populated.png`
+- `screenshots/design-review/followup-mobile-empty.png`
+
+---
+
 ## [2026-02-15 12:00] - Design Evaluation Improvements
 
 **Changed:**
