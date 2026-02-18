@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2026-02-17 17:00] - Community Plugin Compliance Test Suite
+
+**Added:**
+- 24 automated compliance tests (`tests/community-compliance.test.ts`) that guard against ObsidianReviewBot regressions
+- Tests cover: no innerHTML/outerHTML, no inline styles, no deprecated `substr`, async/await correctness, promise handling, command registration (no plugin ID/name leaking), no onunload detach, sentence case UI text
+
+**Files:**
+- `tests/community-compliance.test.ts`
+
+---
+
 ## [2026-02-17 16:30] - Design Eval Refinements: Overflow Fade, Dark Highlight, SVG Icons
 
 **Changed:**

@@ -28,3 +28,4 @@ Track of development iterations and time estimates.
 | 2026-02-17 12:00 | ~15min | Design polish — ghost submit button with quadrant color, per-quadrant overflow fade gradient, dark mode Q3 tuned to 0.08, vertically centered empty state text |
 | 2026-02-17 15:30 | ~15min | Design evaluation polish (5 items) — conditional overflow fade, inverted button weight, edit discoverability text, mobile drag onboarding notice, new task highlight animation |
 | 2026-02-17 16:30 | ~15min | Design eval refinements — stronger overflow fade (0.15), dark mode highlight, SVG delete icon, edit hover affordance, refreshed README + screenshots |
+| 2026-02-17 17:00 | ~10min | Added 24 community plugin compliance tests — guards against ObsidianReviewBot regressions (innerHTML, inline styles, substr, async/await, promises, commands, sentence case) |
