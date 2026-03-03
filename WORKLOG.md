@@ -30,3 +30,4 @@ Track of development iterations and time estimates.
 | 2026-02-17 16:30 | ~15min | Design eval refinements — stronger overflow fade (0.15), dark mode highlight, SVG delete icon, edit hover affordance, refreshed README + screenshots |
 | 2026-02-17 17:00 | ~10min | Added 24 community plugin compliance tests — guards against ObsidianReviewBot regressions (innerHTML, inline styles, substr, async/await, promises, commands, sentence case) |
 | 2026-03-02 20:00 | ~5min | Added onExternalSettingsChange() hook for Obsidian Sync support — reloads data and re-renders view when data.json is updated externally |
+| 2026-03-02 20:15 | ~5min | Added 5 unit tests for onExternalSettingsChange() to guard against sync regression |

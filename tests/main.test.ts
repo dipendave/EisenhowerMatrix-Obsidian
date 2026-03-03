@@ -241,6 +241,104 @@ describe("EisenhowerMatrixPlugin", () => {
 		});
 	});
 
+	describe("onExternalSettingsChange", () => {
+		it("exists as a method on the plugin", () => {
+			const plugin = createPlugin();
+			expect(typeof plugin.onExternalSettingsChange).toBe("function");
+		});
+
+		it("reloads data from disk when called", async () => {
+			const plugin = createPlugin();
+			plugin.addTask("Original", Quadrant.Q1, null);
+			expect(plugin.data.tasks).toHaveLength(1);
+
+			// Simulate sync delivering new data
+			const syncedTasks = [
+				{
+					id: "synced-1",
+					title: "From desktop",
+					quadrant: Quadrant.Q2,
+					dueDate: null,
+					createdAt: "2026-01-01T00:00:00.000Z",
+					order: 0,
+				},
+				{
+					id: "synced-2",
+					title: "Also from desktop",
+					quadrant: Quadrant.Q1,
+					dueDate: "2026-06-01",
+					createdAt: "2026-01-01T00:00:00.000Z",
+					order: 0,
+				},
+			];
+			plugin.loadData = jest.fn().mockResolvedValue({
+				tasks: syncedTasks,
+				version: 1,
+			});
+			plugin.app = {
+				workspace: {
+					getLeavesOfType: () => [],
+				},
+			};
+
+			await plugin.onExternalSettingsChange();
+
+			expect(plugin.data.tasks).toHaveLength(2);
+			expect(plugin.data.tasks[0].title).toBe("From desktop");
+			expect(plugin.data.tasks[1].title).toBe("Also from desktop");
+		});
+
+		it("re-renders all open matrix views", async () => {
+			const plugin = createPlugin();
+			plugin.loadData = jest.fn().mockResolvedValue({ tasks: [], version: 1 });
+
+			const mockRenderMatrix = jest.fn();
+			const mockView = Object.create(
+				(await import("../src/view")).EisenhowerMatrixView.prototype
+			);
+			mockView.renderMatrix = mockRenderMatrix;
+
+			plugin.app = {
+				workspace: {
+					getLeavesOfType: () => [{ view: mockView }],
+				},
+			};
+
+			await plugin.onExternalSettingsChange();
+
+			expect(mockRenderMatrix).toHaveBeenCalledTimes(1);
+		});
+
+		it("handles no open views gracefully", async () => {
+			const plugin = createPlugin();
+			plugin.loadData = jest.fn().mockResolvedValue({ tasks: [], version: 1 });
+			plugin.app = {
+				workspace: {
+					getLeavesOfType: () => [],
+				},
+			};
+
+			// Should not throw
+			await plugin.onExternalSettingsChange();
+			expect(plugin.data.tasks).toEqual([]);
+		});
+
+		it("ignores leaves with non-matrix views", async () => {
+			const plugin = createPlugin();
+			plugin.loadData = jest.fn().mockResolvedValue({ tasks: [], version: 1 });
+
+			const otherView = { renderMatrix: jest.fn() }; // Not an instance of EisenhowerMatrixView
+			plugin.app = {
+				workspace: {
+					getLeavesOfType: () => [{ view: otherView }],
+				},
+			};
+
+			await plugin.onExternalSettingsChange();
+			expect(otherView.renderMatrix).not.toHaveBeenCalled();
+		});
+	});
+
 	describe("loadPluginData", () => {
 		it("initializes with DEFAULT_DATA when loadData returns null", async () => {
 			const plugin = createPlugin();

@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2026-03-02 20:15] - Sync Regression Tests
+
+**Added:**
+- 5 unit tests for `onExternalSettingsChange()` to prevent sync regression: method existence, data reload from disk, view re-render, no-views graceful handling, non-matrix view filtering
+
+**Files:**
+- `tests/main.test.ts`
+
+---
+
 ## [2026-03-02 20:00] - Sync Support via onExternalSettingsChange
 
 **Added:**
