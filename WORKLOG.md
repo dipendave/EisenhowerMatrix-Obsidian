@@ -29,3 +29,4 @@ Track of development iterations and time estimates.
 | 2026-02-17 15:30 | ~15min | Design evaluation polish (5 items) — conditional overflow fade, inverted button weight, edit discoverability text, mobile drag onboarding notice, new task highlight animation |
 | 2026-02-17 16:30 | ~15min | Design eval refinements — stronger overflow fade (0.15), dark mode highlight, SVG delete icon, edit hover affordance, refreshed README + screenshots |
 | 2026-02-17 17:00 | ~10min | Added 24 community plugin compliance tests — guards against ObsidianReviewBot regressions (innerHTML, inline styles, substr, async/await, promises, commands, sentence case) |
+| 2026-03-02 20:00 | ~5min | Added onExternalSettingsChange() hook for Obsidian Sync support — reloads data and re-renders view when data.json is updated externally |

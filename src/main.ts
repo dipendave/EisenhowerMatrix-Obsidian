@@ -61,6 +61,17 @@ export default class EisenhowerMatrixPlugin extends Plugin {
 		await this.saveData(this.data);
 	}
 
+	async onExternalSettingsChange(): Promise<void> {
+		await this.loadPluginData();
+		const leaves = this.app.workspace.getLeavesOfType(VIEW_TYPE_EISENHOWER);
+		for (const leaf of leaves) {
+			const view = leaf.view;
+			if (view instanceof EisenhowerMatrixView) {
+				view.renderMatrix();
+			}
+		}
+	}
+
 	getTasksForQuadrant(quadrant: Quadrant): Task[] {
 		return this.data.tasks
 			.filter((t) => t.quadrant === quadrant)

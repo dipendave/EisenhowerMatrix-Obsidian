@@ -31,7 +31,7 @@ Unidirectional data flow: User action → View calls Plugin CRUD → Plugin save
 ### EisenhowerMatrixPlugin (`src/main.ts`)
 - Purpose: Plugin lifecycle, data ownership, task CRUD operations
 - Dependencies: `obsidian` (Plugin, WorkspaceLeaf)
-- Key interfaces: `onload()`, `activateView()`, `addTask()`, `editTask()`, `deleteTask()`, `restoreTask()`, `moveTask()`, `getTasksForQuadrant()`
+- Key interfaces: `onload()`, `activateView()`, `onExternalSettingsChange()`, `addTask()`, `editTask()`, `deleteTask()`, `restoreTask()`, `moveTask()`, `getTasksForQuadrant()`
 
 ### EisenhowerMatrixView (`src/view.ts`)
 - Purpose: Renders the 2x2 matrix UI, handles all user interactions
@@ -49,6 +49,7 @@ Unidirectional data flow: User action → View calls Plugin CRUD → Plugin save
 3. User adds/deletes/moves task → View calls Plugin CRUD method
 4. Plugin updates in-memory data and calls `saveData()` to persist
 5. View calls `renderMatrix()` to re-render from updated data
+6. Obsidian Sync updates `data.json` externally → `onExternalSettingsChange()` reloads data and re-renders all open views
 
 ## Key Design Decisions
 
@@ -64,6 +65,7 @@ Unidirectional data flow: User action → View calls Plugin CRUD → Plugin save
 - **Dual-axis labels** — desktop uses CSS grid on `.em-matrix-wrapper` (`grid-template-columns: auto 1fr; grid-template-rows: auto 1fr`) to place urgency (horizontal) and importance (vertical, `writing-mode: vertical-lr; rotate(180deg)`) axis labels. Mobile reverts to flex column and hides the importance label.
 
 ## Recent Changes
+- Sync support (2026-03-02): added `onExternalSettingsChange()` hook — reloads data and re-renders when Obsidian Sync updates `data.json` externally
 - Design eval refinements (2026-02-17): stronger overflow fade (0.06 to 0.15), dark mode task highlight animation, SVG delete icon (setIcon), stronger edit hover affordance
 - Design evaluation polish (2026-02-17): conditional overflow fade (only when content overflows), inverted Add/Cancel button weight hierarchy, edit discoverability in empty state text, one-time mobile drag onboarding notice, new task highlight animation on creation
 - Design polish (2026-02-17): form submit button changed to ghost style with quadrant color (eliminated last purple accent), overflow fade gradient matched to per-quadrant backgrounds, dark mode Q3 tuned from 0.10 to 0.08, empty state text vertically centered

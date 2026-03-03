@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2026-03-02 20:00] - Sync Support via onExternalSettingsChange
+
+**Added:**
+- `onExternalSettingsChange()` hook in main plugin — reloads `data.json` and re-renders the matrix view when Obsidian Sync (or any external process) updates the plugin data file
+- Tasks added on one device now appear on other synced devices without requiring a manual reload
+
+**Files:**
+- `src/main.ts`
+
+---
+
 ## [2026-02-17 17:00] - Community Plugin Compliance Test Suite
 
 **Added:**
