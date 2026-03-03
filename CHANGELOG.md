@@ -4,6 +4,35 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2026-03-02 21:00] - Comprehensive View Integration Tests
+
+**Added:**
+- 93 integration tests for `EisenhowerMatrixView` covering all user-facing core functionality
+- Enhanced obsidian mock with real DOM helpers (createEl, createDiv, addClass, etc.) for jsdom testing
+- `jest-environment-jsdom` dev dependency for DOM-based view tests
+
+**Test categories (93 tests):**
+- View identity & lifecycle (10): getViewType, getDisplayText, getIcon, onOpen, onClose, drag hint notice
+- Matrix rendering (9): 4-quadrant structure, axis labels, color classes, add buttons, re-render cleanup
+- Empty & populated state (4): empty text, em-quadrant-empty class, populated rendering
+- Task count badges (4): badge show/hide, correct counts, quadrant isolation
+- Task rendering (12): title, data-task-id, drag handle, delete button, draggable, due dates, overdue class, ordering
+- Add task flow (12): form toggle, submit, validation, error states, Enter/Escape keys, cancel, reset, highlight
+- Edit task flow (12): edit mode activation, pre-fill, save, validation, cancel, Enter/Escape, draggable disabled, editing class
+- Delete & undo flow (6): delete removes task, notice with undo, undo restores, re-renders, nonexistent ID
+- Desktop drag & drop (7): dragstart/dragend, dataTransfer, drop zone highlighting, cross-quadrant move, same-quadrant no-op
+- Data persistence (5): savePluginData called on add, edit, delete, undo, drag move
+- Edge cases (6): whitespace validation, single char, XSS safety, empty date, rapid add, edit validation
+- Accessibility (3): aria-labels on add/delete buttons, data-task-id
+- Event propagation (2): delete vs edit isolation, mousedown stopPropagation
+- Per-quadrant forms (2): independent forms, quadrant isolation
+
+**Files:**
+- `tests/view-integration.test.ts` (new)
+- `tests/__mocks__/obsidian.ts` (enhanced with DOM helpers)
+
+---
+
 ## [2026-03-02 20:15] - Sync Regression Tests
 
 **Added:**

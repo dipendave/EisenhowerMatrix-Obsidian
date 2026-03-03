@@ -15,10 +15,12 @@ Plugin (main.ts) ── owns data, CRUD operations, persistence
 styles.css ── CSS grid wrapper (dual-axis labels), quadrant colors, responsive breakpoints
 
 tests/
-    __mocks__/obsidian.ts ── manual mock for obsidian module
-    main.test.ts ── plugin CRUD tests
+    __mocks__/obsidian.ts ── manual mock for obsidian module + DOM helpers (createEl, addClass, etc.)
+    main.test.ts ── plugin CRUD + sync tests
     view.test.ts ── date utility tests
+    view-integration.test.ts ── 93 integration tests (jsdom) for all view UI flows
     types.test.ts ── constants validation
+    community-compliance.test.ts ── 24 ObsidianReviewBot regression guards
 
 .npmrc ── npm config (legacy-peer-deps for eslint plugin compat)
 .github/workflows/ci.yml ── CI pipeline (test + build)
